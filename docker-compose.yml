@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  flask-services:
+    build: ./flask
+    links:
+      - db
+    volumes:
+      - ./flask
+    ports:
+      - 5001:5001
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
