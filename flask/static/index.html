@@ -22,9 +22,21 @@
       #searchImg {
         height: 60px;
       }
+
+      .listImg {
+        height: 250px;
+      }
+
+      #tblProducts {
+        margin-top: 1em;
+      }
+
+      .product:hover {
+        border: 1px solid blue;
+      }
     </style>
   </head>
-  <body onload="total()">
+  <body onload="view()">
     <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
       <!-- Links -->
       <ul class="navbar-nav">
@@ -32,7 +44,7 @@
           <a class="navbar-brand" href="index.php">Nettbutikk</a>
         </li>
       </ul>
-      <div class="form-inline px-4" style="width: 30%">
+      <div class="form-inline px-4" style="width: 45%">
         <input type="text" class="form-control" placeholder="Keyword" oninput="search(this.value)" id="inpSearch">
       </div>
       <ul class="navbar-nav">
@@ -46,9 +58,30 @@
     </nav>
     <table class="resultData" id="resultData"></table>
 
-    <div class="wrapper">
+    <div class="wrapper" style="width: 80%; margin: auto;">
+      <table class="table" id="tblProducts" style="width: 40%">
+      </table>
     </div>
     <script>
+    function view() {
+
+      $.get("/api/product/get", {}, function(data) {
+        let counter = 0;
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+          const product = data[i];
+          console.log(counter);
+
+          if((i % 4) === 0) {
+            $("#tblProducts").append("</tr><tr>");
+          }
+
+          $("#tblProducts").append(`<td style="padding: 0.5em;" class="product"><img src='${product[4]}' class='listImg'><br>
+                                      <h4>${product[1]}</h4> ${product[3]} kr<br></td>`);
+        }
+      })
+    }
+
     function search(val) {
 
       $("#resultData").html("");

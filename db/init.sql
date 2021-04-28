@@ -11,4 +11,7 @@ CREATE TABLE product (
 
 INSERT INTO product (name, description, price, img) VALUES ("Test 1", "description", 100.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
 INSERT INTO product (name, description, price, img) VALUES ("Test 2", "description", 200.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
-INSERT INTO product (name, description, price, img) VALUES ("Test 2", "description", 300.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
+INSERT INTO product (name, description, price, img) VALUES ("Test 3", "description", 300.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
+INSERT INTO product (name, description, price, img) VALUES ("Test 4", "description", 100.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
+INSERT INTO product (name, description, price, img) VALUES ("Test 5", "description", 200.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
+INSERT INTO product (name, description, price, img) VALUES ("Test 6", "description", 300.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");

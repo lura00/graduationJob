@@ -2,9 +2,9 @@ from flask import Flask, render_template, jsonify, request
 from flask_mysqldb import MySQL
 app = Flask(__name__, template_folder='static/')
 
-app.config['MYSQL_HOST'] = 'db'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'sondre'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'webshop'
 
 mysql = MySQL(app)
@@ -13,9 +13,17 @@ mysql = MySQL(app)
 def hello():
     return render_template("index.html")
 
-# get all product / get product by ID
+# get product by ID
+@app.route('/api/product/get/<int:id>')
+def get(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM product WHERE productID = %s", [id])
+    myresult = cur.fetchall()
+    return jsonify(myresult)
+
+# get all products
 @app.route('/api/product/get')
-def get():
+def getAll():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM product")
     myresult = cur.fetchall()
