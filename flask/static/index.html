@@ -23,20 +23,36 @@
         height: 60px;
       }
 
-      .listImg {
-        height: 250px;
+      .product {
+        padding: 1em;
+        border: 1px solid lightgrey;
       }
 
-      #tblProducts {
-        margin-top: 1em;
+      .listImg {
+        width: 12.5em;
+        height: 12.5em;
+      }
+
+      .wrapper {
+        width: 90%;
+        margin: auto;
       }
 
       .product:hover {
-        border: 1px solid blue;
+        text-decoration: underline;
+        color: blue;
+        cursor: pointer;
+        border-bottom: 3px solid black;
+        transition: 0.5s;
+      }
+
+      #selectOrder {
+        margin-top: 1em;
+        margin-bottom: 1em;
       }
     </style>
   </head>
-  <body onload="view()">
+  <body onload="view(0)">
     <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
       <!-- Links -->
       <ul class="navbar-nav">
@@ -58,25 +74,35 @@
     </nav>
     <table class="resultData" id="resultData"></table>
 
-    <div class="wrapper" style="width: 80%; margin: auto;">
-      <table class="table" id="tblProducts" style="width: 40%">
+    <div class="wrapper">
+      <select class="form-control" onchange="orderProducts()" id="selectOrder">
+        <option>Order by price (low - high)</option>
+        <option>Order by price (high - low)</option>
+        <option>Order by name</option>
+      </select>
+      <table class="table" id="tblProducts">
       </table>
     </div>
     <script>
-    function view() {
+    function orderProducts() {
+      const index = document.getElementById("selectOrder").selectedIndex;
+      view(index);
+    }
 
-      $.get("/api/product/get", {}, function(data) {
-        let counter = 0;
+    function view(order) {
+
+      $.get("/api/product/get", {order: order}, function(data) {
         console.log(data);
+
+        $("#tblProducts").html(`<h4>Displaying ${data.length} products.</h4>`);
         for (var i = 0; i < data.length; i++) {
           const product = data[i];
-          console.log(counter);
 
-          if((i % 4) === 0) {
+          if((i % 5) === 0) {
             $("#tblProducts").append("</tr><tr>");
           }
 
-          $("#tblProducts").append(`<td onclick="showProduct(${product[0]})" style="padding: 0.5em;" class="product"><img src='${product[4]}' class='listImg'><br>
+          $("#tblProducts").append(`<td onclick="showProduct(${product[0]})" class="product"><img src='${product[4]}' class='listImg'><br>
                                       <h4>${product[1]}</h4> ${product[3]} kr<br></td>`);
         }
       })
@@ -100,12 +126,19 @@
         $.get("/api/product/search", {keyword: val}, function(data) {
           // search db
           console.log(data);
-          $("#resultData").html(`<tr><td><img id="searchImg" src='${data[0][4]}'></td>
-                                     <td>${data[0][1]}, ${data[0][3]} kr.<br>
-                                         <i>${data[0][2]}</i></td>
-                                  </tr>`);
+
+          if (data.length > 0) { // match
+            for (var i = 0; i < data.length; i++) {
+                $("#resultData").append(`<tr><td><img id="searchImg" src='${data[i][4]}'></td>
+                                         <td>${data[i][1]}, ${data[i][3]} kr.<br>
+                                         <i>${data[i][2]}</i></td>
+                                         </tr>`);
+            }
+          } else { // no match
+            $("#resultData").html("No match for: "+val);
+          }
         })
-      } else {
+      } else { // no input
         $("#resultData").css("display","none");
       }
     }

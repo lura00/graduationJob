@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__, template_folder='static/')
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'sondre'
+app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'webshop'
 
@@ -24,17 +24,23 @@ def get(id):
 # get all products
 @app.route('/api/product/get')
 def getAll():
+    order = int(request.args.get('order'))
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM product")
+    if order == 0:
+        cur.execute("SELECT * FROM product ORDER BY price ASC")
+    elif order == 1:
+        cur.execute("SELECT * FROM product ORDER BY price DESC")
+    elif order == 2:
+        cur.execute("SELECT * FROM product ORDER BY name ASC")
     myresult = cur.fetchall()
     return jsonify(myresult)
 
 # search products
 @app.route('/api/product/search')
 def search():
-    keyword = str(request.args.get('keyword'))
+    keyword = "%"+request.args.get('keyword')+"%"
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM product WHERE name = %s", [keyword])
+    cur.execute("SELECT * FROM product WHERE name LIKE %s", [keyword])
     myresult = cur.fetchall()
     return jsonify(myresult)
 
