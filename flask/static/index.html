@@ -76,9 +76,17 @@
             $("#tblProducts").append("</tr><tr>");
           }
 
-          $("#tblProducts").append(`<td style="padding: 0.5em;" class="product"><img src='${product[4]}' class='listImg'><br>
+          $("#tblProducts").append(`<td onclick="showProduct(${product[0]})" style="padding: 0.5em;" class="product"><img src='${product[4]}' class='listImg'><br>
                                       <h4>${product[1]}</h4> ${product[3]} kr<br></td>`);
         }
+      })
+    }
+
+    function showProduct(id) {
+      $("#tblProducts").css("display","none");
+
+      $.get("/api/product/get/"+id, {}, function(data) {
+        console.log(data);
       })
     }
 
