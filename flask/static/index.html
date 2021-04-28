@@ -5,7 +5,24 @@
     <title>Database search</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
+    <style>
+      .resultData {
+        box-shadow: 5px 5px 5px lightgrey;
+        border: 1px solid grey;
+        border-radius: 0px 0px 5px 5px;
+        padding: 1em;
+        display: none;
+        font-size: 18px;
+        width: 45%;
+        margin-left: 10em;
+        position: absolute;
+        background-color: white;
+      }
+
+      #searchImg {
+        height: 60px;
+      }
+    </style>
   </head>
   <body onload="total()">
     <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
@@ -15,7 +32,7 @@
           <a class="navbar-brand" href="index.php">Nettbutikk</a>
         </li>
       </ul>
-      <div class="form-inline px-4">
+      <div class="form-inline px-4" style="width: 30%">
         <input type="text" class="form-control" placeholder="Keyword" oninput="search(this.value)" id="inpSearch">
       </div>
       <ul class="navbar-nav">
@@ -39,11 +56,13 @@
       if (val != "" && val != " ") {
         $("#resultData").css("display","block");
 
-        $.get("/api/search", {keyword: val}, function(data) {
+        $.get("/api/product/search", {keyword: val}, function(data) {
           // search db
-          const result = JSON.parse(data);
-          console.log(result);
-          }
+          console.log(data);
+          $("#resultData").html(`<tr><td><img id="searchImg" src='${data[0][4]}'></td>
+                                     <td>${data[0][1]}, ${data[0][3]} kr.<br>
+                                         <i>${data[0][2]}</i></td>
+                                  </tr>`);
         })
       } else {
         $("#resultData").css("display","none");
