@@ -6,6 +6,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style>
+      body {
+        font-family: sans-serif;
+      }
+
       .resultData {
         box-shadow: 5px 5px 5px lightgrey;
         border: 1px solid grey;
@@ -13,14 +17,24 @@
         padding: 1em;
         display: none;
         font-size: 18px;
-        width: 45%;
+        width: 26%;
         margin-left: 10em;
         position: absolute;
         background-color: white;
       }
 
-      #searchImg {
-        height: 60px;
+      #inpSearch {
+        width: 50%;
+      }
+
+      #inpSearch:focus {
+        width: 65%;
+        transition: 0.25s;
+      }
+
+      .searchImg {
+        height: 70px;
+        width: 70px;
       }
 
       .product {
@@ -38,12 +52,25 @@
         margin: auto;
       }
 
+      .productSearch {
+        text-align: center;
+        width: 100%;
+        padding: 1em;
+      }
+
       .product:hover {
         text-decoration: underline;
         color: blue;
         cursor: pointer;
         border-bottom: 3px solid black;
         transition: 0.5s;
+      }
+
+      .productSearch:hover {
+        font-size: 110%;
+        transition: 0.5s;
+        background-color: black;
+        color: white;
       }
 
       #selectOrder {
@@ -57,22 +84,19 @@
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="navbar-brand" href="index.php">Nettbutikk</a>
+          <a class="navbar-brand" href="index.html">Webshop</a>
         </li>
       </ul>
       <div class="form-inline px-4" style="width: 45%">
-        <input type="text" class="form-control" placeholder="Keyword" oninput="search(this.value)" id="inpSearch">
+        <input type="text" class="form-control" placeholder="Search after products..." oninput="search(this.value)" id="inpSearch">
       </div>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="cart.php" id="lblHandlekurv"></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" href="#">Cart</a>
         </li>
       </ul>
     </nav>
-    <table class="resultData" id="resultData"></table>
+    <table class="resultData table-responsive" id="resultData"></table>
 
     <div class="wrapper">
       <select class="form-control" onchange="orderProducts()" id="selectOrder">
@@ -89,6 +113,7 @@
       view(index);
     }
 
+    // show all products
     function view(order) {
 
       $.get("/api/product/get", {order: order}, function(data) {
@@ -103,11 +128,12 @@
           }
 
           $("#tblProducts").append(`<td onclick="showProduct(${product[0]})" class="product"><img src='${product[4]}' class='listImg'><br>
-                                      <h4>${product[1]}</h4> ${product[3]} kr<br></td>`);
+                                      <h4>${product[1]}</h4>${product[3]} kr<br></td>`);
         }
       })
     }
 
+    // show specific product
     function showProduct(id) {
       $("#tblProducts").css("display","none");
 
@@ -116,9 +142,8 @@
       })
     }
 
+    // search products
     function search(val) {
-
-      $("#resultData").html("");
 
       if (val != "" && val != " ") {
         $("#resultData").css("display","block");
@@ -128,10 +153,10 @@
           console.log(data);
 
           if (data.length > 0) { // match
+            $("#resultData").html("");
             for (var i = 0; i < data.length; i++) {
-                $("#resultData").append(`<tr><td><img id="searchImg" src='${data[i][4]}'></td>
-                                         <td>${data[i][1]}, ${data[i][3]} kr.<br>
-                                         <i>${data[i][2]}</i></td>
+                $("#resultData").append(`<tr class="productSearch"><td><img class="searchImg" src='${data[i][4]}'></td>
+                                         <td width="100%" style="text-align: left; padding-left: 1em">${data[i][1]}, ${data[i][3]} kr.</td>
                                          </tr>`);
             }
           } else { // no match
