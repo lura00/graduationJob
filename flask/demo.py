@@ -46,5 +46,13 @@ def search():
     myresult = cur.fetchall()
     return jsonify(myresult)
 
+@app.route('/api/auth/admin')
+def search():
+    keyword = "%"+request.args.get('keyword')+"%"
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM product WHERE name LIKE %s", [keyword])
+    myresult = cur.fetchall()
+    return jsonify(myresult)
+
 if __name__ == "__main__":
     app.run(host ='0.0.0.0', port = 5001, debug = True)

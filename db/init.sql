@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS webshop;
-CREATE USER 'admin'@'localhost' IDENTIFIED BY '';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '';
 GRANT ALL ON webshop.* TO 'admin'@'localhost';
 USE webshop;
 
@@ -11,7 +11,16 @@ CREATE TABLE IF NOT EXISTS product (
   img varchar(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS adminLogin (
+  userID int PRIMARY KEY auto_increment,
+  username varchar(50) NOT NULL,
+  pwd varchar(50) NOT NULL
+);
+
 DELETE FROM product;
+DELETE FROM adminLogin;
+
+INSERT INTO adminLogin (username, pwd) VALUES ("admin", "password");
 
 INSERT INTO product (name, description, price, img) VALUES ("Football boots", "Adidas boots that fits all genders. Size: 43.", 500.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
 INSERT INTO product (name, description, price, img) VALUES ("Rollerskis", "Compact rollerskis from OneWay. Length: 70 cm.", 1499.0, "https://media.ekosport.fr/INTERSHOP/static/WFS/EKO-EU-Site/-/EKO/en_EU/Product/600/M00047735.png");

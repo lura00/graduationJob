@@ -12,7 +12,15 @@
       <h3>Admin login</h3>
       <input type="text" class="form-control" id="inpUsername" placeholder="Admin username">
       <input type="password" class="form-control" id="inpPassword" placeholder="Password">
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary" onclick="login()">Login</button>
     </div>
+
+    <script>
+        function login() {
+            $.post("/api/auth/admin", {username: $("#inpUsername").val(), pwd: $("#inpPassword").val()}, function(data) {
+                console.log(data);
+            })
+        }
+    </script>
 </body>
 </html>
