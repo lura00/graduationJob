@@ -4,7 +4,7 @@ app = Flask(__name__, template_folder='static/')
 
 # db config
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'sondre'
+app.config['MYSQL_USER'] = 'admin'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'webshop'
 

@@ -1,4 +1,6 @@
 CREATE DATABASE IF NOT EXISTS webshop;
+CREATE USER 'admin'@'localhost' IDENTIFIED BY '';
+GRANT ALL ON webshop.* TO 'admin'@'localhost';
 USE webshop;
 
 CREATE TABLE IF NOT EXISTS product (
