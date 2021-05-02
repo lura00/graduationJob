@@ -81,12 +81,12 @@
          $("#product").html(`<h1>${data[0][1]}</h1>
                              <h3>${data[0][3]} kr</h3>
                              <table id="producttbl">
-                                <td>
+                                <td style="padding-right: 3em">
                                     <img style="width: 25em; height: 25em" src='${data[0][4]}'>
                                 </td>
-                                <td>
-                                    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dignissim finibus pharetra. Etiam tempor elementum lacus ut lacinia. Suspendisse tristique mi mauris,  </h5>
-                                    <button style="font-size: 1.5em">Add to cart</button>
+                                <td style="width: 30em">
+                                    <h5>${data[0][2]}</h5>
+                                    <br><button style="font-size: 1.5em">Add to cart</button>
                                 </td>
                              </table>`);
       })
