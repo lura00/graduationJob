@@ -16,7 +16,7 @@
         </li>
       </ul>
       <div class="form-inline px-4" style="width: 45%">
-        <input type="text" class="form-control" placeholder="Search after products..." oninput="search(this.value)" id="inpSearch">
+        <input type="text" class="form-control" placeholder="Search after products..." oninput="search(this.value)" onclick="search(this.value)" id="inpSearch">
       </div>
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -42,6 +42,16 @@
     </div>
 
     <script>
+    // snippet from https://stackoverflow.com/a/7385673
+    $(document).mouseup(function(e) {
+      var container = $("#resultData");
+
+      // if the target of the click isn't the container nor a descendant of the container
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.hide();
+      }
+    });
+
     function orderProducts() {
       const index = document.getElementById("selectOrder").selectedIndex;
       view(index);
@@ -103,7 +113,7 @@
           console.log(data);
 
           if (data.length > 0) { // match
-            $("#resultData").html("");
+            $("#resultData").html(`<tr style="white-space: nowrap; font-weight: bold;"><td>${data.length} results.</td><td style="text-decoration: underline; color: blue;" onclick=search("")> Cancel.</td></tr>`);
             for (var i = 0; i < data.length; i++) {
                 $("#resultData").append(`<tr onclick="showProduct(${data[i][0]})" class="productSearch"><td><img class="searchImg" src='${data[i][4]}'></td>
                                          <td width="100%" style="text-align: left; padding-left: 1em">${data[i][1]}, ${data[i][3]} kr.</td>

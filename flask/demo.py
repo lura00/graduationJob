@@ -42,7 +42,7 @@ def getAll():
 def search():
     keyword = "%"+request.args.get('keyword')+"%"
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM product WHERE name LIKE %s", [keyword])
+    cur.execute("SELECT * FROM product WHERE name LIKE %s LIMIT 7", [keyword])
     myresult = cur.fetchall()
     return jsonify(myresult)
 
