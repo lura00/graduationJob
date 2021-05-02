@@ -72,6 +72,7 @@
       $("#resultData").css("display","none");
       $("#tblProducts").css("display","none");
       $("#selectOrder").css("opacity","0");
+      $("#selectOrder").css("pointer-events","none");
       $("#product").css("display","block");
 
       $.get("/api/product/get/"+id, {}, function(data) {
