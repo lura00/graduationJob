@@ -70,16 +70,19 @@
     // show specific product
     function showProduct(id) {
       $("#tblProducts").css("display","none");
+      $("#selectOrder").css("opacity","0");
       $("#product").css("display","block");
 
       $.get("/api/product/get/"+id, {}, function(data) {
         console.log(data);
         console.log("Name: " + data[0][1] + " Desc: " + data[0][2])
          $("#product").html(`<h1>${data[0][1]}</h1>
-                             <h3 style="text-align: center;">${data[0][3]} kr</h3>
-                             <img src='${data[0][4]}'>
-                             <p>${data[0][2]}</p>
-                             <button type="button"> Add to cart </button> `);
+                             <h3>${data[0][3]} kr</h3>
+                             <table id="producttbl">
+                                <tr><td><img style="width: 25em; height: 25em" src='${data[0][4]}'></td></tr>
+                                <tr><td><p>${data[0][2]}</p></td>
+                                <td><button type="button">Add to cart</button></td></tr>
+                             </table>`);
       })
     }
 
