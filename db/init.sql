@@ -1,13 +1,15 @@
-CREATE DATABASE webshop;
+CREATE DATABASE IF NOT EXISTS webshop;
 USE webshop;
 
-CREATE TABLE product (
+CREATE TABLE IF NOT EXISTS product (
   productID int PRIMARY KEY auto_increment,
   name varchar(50) NOT NULL,
   description varchar(100) NOT NULL,
   price float,
   img varchar(255) NOT NULL
 );
+
+DELETE FROM product;
 
 INSERT INTO product (name, description, price, img) VALUES ("Football boots", "Adidas boots that fits all genders. Size: 43.", 500.0, "https://www.xxl.no/filespin/d7c77d6edd624184a6cda87ac4e009c2?resize=317,317&quality=90&bgcolor=efefef");
 INSERT INTO product (name, description, price, img) VALUES ("Rollerskis", "Compact rollerskis from OneWay. Length: 70 cm.", 1499.0, "https://media.ekosport.fr/INTERSHOP/static/WFS/EKO-EU-Site/-/EKO/en_EU/Product/600/M00047735.png");
