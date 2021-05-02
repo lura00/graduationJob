@@ -5,86 +5,14 @@
     <title>Database search</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <style>
-      body {
-        font-family: sans-serif;
-      }
-
-      .resultData {
-        box-shadow: 5px 5px 5px lightgrey;
-        border: 1px solid grey;
-        border-radius: 0px 0px 5px 5px;
-        padding: 1em;
-        display: none;
-        font-size: 18px;
-        width: 26%;
-        margin-left: 10em;
-        position: absolute;
-        background-color: white;
-      }
-
-      #inpSearch {
-        width: 50%;
-      }
-
-      #inpSearch:focus {
-        width: 65%;
-        transition: 0.25s;
-      }
-
-      .searchImg {
-        height: 70px;
-        width: 70px;
-      }
-
-      .product {
-        padding: 1em;
-        border: 1px solid lightgrey;
-      }
-
-      .listImg {
-        width: 12.5em;
-        height: 12.5em;
-      }
-
-      .wrapper {
-        width: 90%;
-        margin: auto;
-      }
-
-      .productSearch {
-        text-align: center;
-        width: 100%;
-        padding: 1em;
-      }
-
-      .product:hover {
-        text-decoration: underline;
-        color: blue;
-        cursor: pointer;
-        border-bottom: 3px solid black;
-        transition: 0.5s;
-      }
-
-      .productSearch:hover {
-        font-size: 110%;
-        transition: 0.5s;
-        background-color: black;
-        color: white;
-      }
-
-      #selectOrder {
-        margin-top: 1em;
-        margin-bottom: 1em;
-      }
-    </style>
+    <link href="static/css/style.css" type="text/css" rel="stylesheet">
   </head>
   <body onload="view(0)">
     <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="navbar-brand" href="index.html">Webshop</a>
+          <a class="navbar-brand">Webshop</a>
         </li>
       </ul>
       <div class="form-inline px-4" style="width: 45%">
@@ -93,6 +21,9 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="static/admin.html">Admin <login></login></a>
         </li>
       </ul>
     </nav>

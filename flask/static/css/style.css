@@ -1,0 +1,71 @@
+body {
+        font-family: sans-serif;
+      }
+
+      .resultData {
+        box-shadow: 5px 5px 5px lightgrey;
+        border: 1px solid grey;
+        border-radius: 0px 0px 5px 5px;
+        padding: 1em;
+        display: none;
+        font-size: 18px;
+        width: 26%;
+        margin-left: 10em;
+        position: absolute;
+        background-color: white;
+      }
+
+      #inpSearch {
+        width: 50%;
+      }
+
+      #inpSearch:focus {
+        width: 65%;
+        transition: 0.25s;
+      }
+
+      .searchImg {
+        height: 70px;
+        width: 70px;
+      }
+
+      .product {
+        padding: 1em;
+        border: 1px solid lightgrey;
+      }
+
+      .listImg {
+        width: 12.5em;
+        height: 12.5em;
+      }
+
+      .wrapper {
+        width: 90%;
+        margin: auto;
+      }
+
+      .productSearch {
+        text-align: center;
+        width: 100%;
+        padding: 1em;
+      }
+
+      .product:hover {
+        text-decoration: underline;
+        color: blue;
+        cursor: pointer;
+        border-bottom: 3px solid black;
+        transition: 0.5s;
+      }
+
+      .productSearch:hover {
+        font-size: 110%;
+        transition: 0.5s;
+        background-color: black;
+        color: white;
+      }
+
+      #selectOrder {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
