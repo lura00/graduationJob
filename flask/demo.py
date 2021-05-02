@@ -51,7 +51,7 @@ def login():
     username = request.form.get('username')
     pwd = request.form.get('pwd')
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM adminLogin WHERE username = %s AND pwd = %s", [keyword])
+    cur.execute("SELECT * FROM adminLogin WHERE username = %s AND pwd = %s", [username, pwd])
     myresult = cur.fetchall()
     return jsonify(myresult)
 
