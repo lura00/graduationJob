@@ -12,7 +12,7 @@
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="navbar-brand">Webshop</a>
+          <a class="navbar-brand" onclick="location.reload();">Webshop</a>
         </li>
       </ul>
       <div class="form-inline px-4" style="width: 45%">
@@ -69,6 +69,7 @@
 
     // show specific product
     function showProduct(id) {
+      $("#resultData").css("display","none");
       $("#tblProducts").css("display","none");
       $("#selectOrder").css("opacity","0");
       $("#product").css("display","block");
@@ -99,7 +100,7 @@
           if (data.length > 0) { // match
             $("#resultData").html("");
             for (var i = 0; i < data.length; i++) {
-                $("#resultData").append(`<tr class="productSearch"><td><img class="searchImg" src='${data[i][4]}'></td>
+                $("#resultData").append(`<tr onclick="showProduct(${data[i][0]})" class="productSearch"><td><img class="searchImg" src='${data[i][4]}'></td>
                                          <td width="100%" style="text-align: left; padding-left: 1em">${data[i][1]}, ${data[i][3]} kr.</td>
                                          </tr>`);
             }
