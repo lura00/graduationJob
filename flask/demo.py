@@ -46,11 +46,12 @@ def search():
     myresult = cur.fetchall()
     return jsonify(myresult)
 
-@app.route('/api/auth/admin')
-def search():
-    keyword = "%"+request.args.get('keyword')+"%"
+@app.route('/api/auth/admin', methods = ['POST', 'GET'])
+def login():
+    username = request.form.get('username')
+    pwd = request.form.get('pwd')
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM product WHERE name LIKE %s", [keyword])
+    cur.execute("SELECT * FROM adminLogin WHERE username = %s AND pwd = %s", [keyword])
     myresult = cur.fetchall()
     return jsonify(myresult)
 
