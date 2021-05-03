@@ -70,4 +70,7 @@ body {
 	margin-bottom: 1em;
 }
 
-/*Product page*/
+/* Product page */
+#product {
+	display: none;
+}

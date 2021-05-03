@@ -37,7 +37,7 @@
       </select>
       <table class="table" id="tblProducts">
       </table>
-      <div id="product" style="display: none">
+      <div id="product">
       </div>
     </div>
 
@@ -87,18 +87,17 @@
 
       $.get("/api/product/get/"+id, {}, function(data) {
         console.log(data);
-        console.log("Name: " + data[0][1] + " Desc: " + data[0][2])
-         $("#product").html(`<h1>${data[0][1]}</h1>
-                             <h3>${data[0][3]} kr</h3>
-                             <table id="producttbl">
+        $("#product").html(`<h1>${data[0][1]}</h1>
+                            <h3>${data[0][3]} kr</h3>
+                            <table id="producttbl">
                                 <td style="padding-right: 3em">
-                                    <img style="width: 25em; height: 25em" src='${data[0][4]}'>
+                                    <img style="width: 20em; height: 20em" src='${data[0][4]}'>
                                 </td>
-                                <td style="width: 30em">
-                                    <h5>${data[0][2]}</h5>
-                                    <br><button class="btn btn-primary" style="font-size: 1.5em">Add to cart</button>
+                                <td style="width: 25em">
+                                    <h5>${data[0][2]}</h5><br>
+                                    <button class="btn btn-primary" style="font-size: 1.5em">Add to cart</button>
                                 </td>
-                             </table>`);
+                            </table>`);
       })
     }
 
