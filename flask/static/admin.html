@@ -70,7 +70,7 @@
                     $("#preview").attr('src',"static/media/"+filename);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif");
+                    alert("Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif, webp");
                     $("#file").val("");
                     $("#preview").attr('src',"https://i.stack.imgur.com/y9DpT.jpg");
                 }

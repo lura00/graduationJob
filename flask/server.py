@@ -14,7 +14,7 @@ app.config['MYSQL_DB'] = 'webshop'
 
 # file upload
 app.config['UPLOAD_FOLDER'] = '/media'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'webp'}
 
 mysql = MySQL(app)
 
