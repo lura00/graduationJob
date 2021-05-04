@@ -1,5 +1,9 @@
+import os
+
 from flask import Flask, render_template, jsonify, request
 from flask_mysqldb import MySQL
+from werkzeug.utils import secure_filename
+
 app = Flask(__name__, template_folder='static/')
 
 # db config
@@ -8,12 +12,20 @@ app.config['MYSQL_USER'] = 'admin'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'webshop'
 
+# file upload
+app.config['UPLOAD_FOLDER'] = '/media'
+
 mysql = MySQL(app)
 
 # index page
 @app.route('/')
-def hello():
+def index():
     return render_template("index.html")
+
+# admin page
+@app.route('/admin')
+def admin():
+    return render_template("admin.html");
 
 # get product by ID
 @app.route('/api/product/get/<int:id>')
@@ -54,6 +66,31 @@ def login():
     cur.execute("SELECT * FROM adminLogin WHERE username = %s AND pwd = %s", [username, pwd])
     myresult = cur.fetchall()
     return jsonify(myresult)
+
+
+@app.route('/api/media/upload', methods=['POST', 'GET'])
+def upload():
+    if request.method == "POST":
+        # file upload
+        uploaded_file = request.files['file']
+        filename = secure_filename(uploaded_file.filename)
+        if filename != '':
+            absolute_path = os.path.abspath("static/media/"+filename)
+            uploaded_file.save(absolute_path)
+            return filename
+
+@app.route('/api/product/add', methods=['POST', 'GET'])
+def add():
+    if request.method == "POST":
+        name = request.form.get("name")
+        description = request.form.get("description")
+        price = request.form.get("price")
+        img = request.form.get("img")
+        print(img)
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO product (name, description, price, img) VALUES (%s, %s, %s, %s)", [name, description, price, img])
+        mysql.connection.commit()
+        return "ok"
 
 if __name__ == "__main__":
     app.run(host ='0.0.0.0', port = 5001, debug = True)
