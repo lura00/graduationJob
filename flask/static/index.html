@@ -114,7 +114,7 @@
           if (data.length > 0) { // match
             $("#resultData").html(`<tr style="white-space: nowrap; font-weight: bold;"><td>${data.length} results.</td><td style="text-decoration: underline; color: blue;" onclick=search("")> Cancel.</td></tr>`);
             for (var i = 0; i < data.length; i++) {
-                $("#resultData").append(`<tr onclick="showProduct(${data[i][0]})" class="productSearch"><td><img class="searchImg" src='${data[i][4]}'></td>
+                $("#resultData").append(`<tr onclick="showProduct(${data[i][0]})" class="productSearch"><td><img class="searchImg" src='static/media/${data[i][4]}'></td>
                                          <td width="100%" style="text-align: left; padding-left: 1em">${data[i][1]}, ${data[i][3]} kr.</td>
                                          </tr>`);
             }
