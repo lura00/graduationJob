@@ -27,15 +27,15 @@
         </div>
 
         <!-- Add new product -->
-        <form enctype="multipart/form-data" class="form-group" id="frmProduct">
+        <form enctype="multipart/form-data" class="form-group" id="frmProduct" style="display: none;">
             <h3>Add new product</h3>
-            <input type="file" class="form-control" name="file" onchange="uploadMedia()">
-            <img id="preview" alt="No image">
-        </form>
+            <input type="file" class="form-control" name="file" id="file" onchange="uploadMedia()">
+            <img id="preview" alt="No image" src="https://i.stack.imgur.com/y9DpT.jpg">
             <input type="text" class="form-control" id="inpName" placeholder="Product name">
             <textarea class="form-control" id="inpDescription" placeholder="Description"></textarea>
             <input type="number" step="0.1" class="form-control" id="inpPrice" placeholder="Price in kr.">
             <button class="btn btn-primary" onclick="addProduct()">Add</button>
+        </form>
     </div>
 
     <script>
@@ -68,6 +68,11 @@
                 success: function(data) {
                     filename = data;
                     $("#preview").attr('src',"static/media/"+filename);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif");
+                    $("#file").val("");
+                    $("#preview").attr('src',"https://i.stack.imgur.com/y9DpT.jpg");
                 }
             });
         }

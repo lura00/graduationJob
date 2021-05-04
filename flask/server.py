@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, abort
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
 
@@ -14,6 +14,7 @@ app.config['MYSQL_DB'] = 'webshop'
 
 # file upload
 app.config['UPLOAD_FOLDER'] = '/media'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif'}
 
 mysql = MySQL(app)
 
@@ -67,6 +68,10 @@ def login():
     myresult = cur.fetchall()
     return jsonify(myresult)
 
+# Snippet from: https://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/api/media/upload', methods=['POST', 'GET'])
 def upload():
@@ -74,10 +79,13 @@ def upload():
         # file upload
         uploaded_file = request.files['file']
         filename = secure_filename(uploaded_file.filename)
-        if filename != '':
+        if filename != '' and allowed_file(filename):
             absolute_path = os.path.abspath("static/media/"+filename)
             uploaded_file.save(absolute_path)
             return filename
+        else:
+            abort(500)
+
 
 @app.route('/api/product/add', methods=['POST', 'GET'])
 def add():

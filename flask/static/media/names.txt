@@ -1,8 +1,0 @@
-names.txt
-sleeve-black.png
-sleeve-white.png
-socks.jpg
-sport-shorts.jpg
-tracksuit-bottom.jpg
-training-shorts.webp
-tshirt.jpg
