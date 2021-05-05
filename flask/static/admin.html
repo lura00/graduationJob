@@ -30,16 +30,17 @@
         <form enctype="multipart/form-data" class="form-group" id="frmProduct" style="display: none;">
             <h3>Add new product</h3>
             <input type="file" class="form-control" name="file" id="file" onchange="uploadMedia()">
-            <img id="preview" alt="No image" src="https://i.stack.imgur.com/y9DpT.jpg">
-            <input type="text" class="form-control" id="inpName" placeholder="Product name">
-            <textarea class="form-control" id="inpDescription" placeholder="Description"></textarea>
-            <input type="number" step="0.1" class="form-control" id="inpPrice" placeholder="Price in kr.">
-            <button class="btn btn-primary" onclick="addProduct()">Add</button>
+            <div class="alert alert-danger" id="error" style="display: none;">Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif, webp.</div>
+            <img id="preview" alt="No image" src="static/media/placeholder.jpg">
+            <input type="text" class="form-control" id="inpName" placeholder="Product name" required>
+            <textarea class="form-control" id="inpDescription" placeholder="Description" required></textarea>
+            <input type="number" step="0.01" class="form-control" id="inpPrice" placeholder="Price in kr." required>
+            <button class="btn btn-primary" type="submit">Add</button>
         </form>
     </div>
 
     <script>
-        let filename;
+        let filename = "placeholder.jpg";
 
         function login() {
             $.post("/api/auth/admin", {username: $("#inpUsername").val(), pwd: $("#inpPassword").val()}, function(data) {
@@ -49,7 +50,6 @@
                     alert("Login failed.")
                 } else {
                     // login ok
-                    alert("ok");
                     $("#frmLogin").css("display","none");
                     $("#frmProduct").css("display","block");
                 }
@@ -66,22 +66,31 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
+                    $("#error").css("display","none");
                     filename = data;
                     $("#preview").attr('src',"static/media/"+filename);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif, webp");
+                    $("#error").css("display","block");
                     $("#file").val("");
-                    $("#preview").attr('src',"https://i.stack.imgur.com/y9DpT.jpg");
+                    filename = "placeholder.jpg";
+                    $("#preview").attr('src',"static/media/"+filename);
                 }
             });
         }
 
-        function addProduct() {
+        document.getElementById("frmProduct").onsubmit = function(evt) { // submit form
+            evt.preventDefault();
 
-            alert(filename);
             $.post("/api/product/add", {name: $("#inpName").val(), description: $("#inpDescription").val(), price: $("#inpPrice").val(), img: filename}, function(data) {
-
+                alert("New product added!");
+                // reset form
+                $("#file").val("");
+                $("#inpName").val("");
+                $("#inpDescription").val("");
+                $("#inpPrice").val("");
+                filename = "placeholder.jpg";
+                $("#preview").attr('src',"static/media/"+filename);
             })
         }
     </script>

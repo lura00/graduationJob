@@ -59,10 +59,10 @@ body {
 }
 
 .productSearch:hover {
-	font-size: 110%;
 	transition: 0.5s;
 	background-color: black;
 	color: white;
+	cursor: pointer;
 }
 
 #selectOrder {

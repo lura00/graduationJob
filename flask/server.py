@@ -47,6 +47,8 @@ def getAll():
         cur.execute("SELECT * FROM product ORDER BY price DESC")
     elif order == 2:
         cur.execute("SELECT * FROM product ORDER BY name ASC")
+    elif order == 3:
+        cur.execute("SELECT * FROM product ORDER BY productID DESC")
     myresult = cur.fetchall()
     return jsonify(myresult)
 

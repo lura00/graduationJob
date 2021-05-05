@@ -30,10 +30,12 @@
     <table class="resultData table-responsive" id="resultData"></table>
 
     <div class="wrapper">
+      <h4 style="margin-top: 1em;">Sort products</h4>
       <select class="form-control" onchange="orderProducts()" id="selectOrder">
-        <option>Order by price (low - high)</option>
-        <option>Order by price (high - low)</option>
-        <option>Order by name</option>
+        <option>Price (low - high)</option>
+        <option>Price (high - low)</option>
+        <option>Name</option>
+        <option>Recently added</option>
       </select>
       <table class="table" id="tblProducts">
       </table>
