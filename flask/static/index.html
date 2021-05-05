@@ -30,7 +30,7 @@
     <table class="resultData table-responsive" id="resultData"></table>
 
     <div class="wrapper">
-      <h4 style="margin-top: 1em;">Sort products</h4>
+      <h4 style="margin-top: 1em;" id="headerSort">Sort products</h4>
       <select class="form-control" onchange="orderProducts()" id="selectOrder">
         <option>Price (low - high)</option>
         <option>Price (high - low)</option>
@@ -67,20 +67,33 @@
 
         $("#tblProducts").html(`<h4>Displaying ${data.length} products.</h4>`);
         for (var i = 0; i < data.length; i++) {
-          const product = data[i];
+          const product = parseJSON(data[i]);
 
           if((i % 5) === 0) {
             $("#tblProducts").append("</tr><tr>");
           }
 
-          $("#tblProducts").append(`<td onclick="showProduct(${product[0]})" class="product" style="width: 20%"><div style="text-align: center"><img src='static/media/${product[4]}' class='listImg'></div><br>
-                                      <h4>${product[1]}</h4>${product[3]} kr<br></td>`);
+          $("#tblProducts").append(`<td onclick="showProduct(${product.id})" class="product" style="width: 20%"><div style="text-align: center"><img src='static/media/${product.img}' class='listImg'></div><br>
+                                      <h4>${product.name}</h4><p>${product.short_desc}</p>${product.price} kr<br></td>`);
         }
       })
     }
 
+    // parse JSON to JS object
+    function parseJSON(data) {
+      return {
+        id: data[0],
+        name: data[1],
+        short_desc: data[2],
+        long_desc: data[3],
+        price: data[4],
+        img: data[5]
+      };
+    }
+
     // show specific product
     function showProduct(id) {
+      $("#headerSort").css("display", "none");
       $("#resultData").css("display","none");
       $("#tblProducts").css("display","none");
       $("#selectOrder").css("opacity","0");
@@ -88,15 +101,17 @@
       $("#product").css("display","block");
 
       $.get("/api/product/get/"+id, {}, function(data) {
-        console.log(data);
-        $("#product").html(`<h1>${data[0][1]}</h1>
-                            <h3>${data[0][3]} kr</h3>
+        const product = parseJSON(data[0]);
+
+        $("#product").html(`<h1>${product.name}</h1>
+                            <p><strong>${product.short_desc}</strong></p>
+                            <h3>${product.price} kr</h3>
                             <table id="producttbl">
                                 <td style="padding-right: 3em">
-                                    <img style="width: 20em; height: 20em" src='/static/media/${data[0][4]}'>
+                                    <img style="width: 20em; height: 20em" src='/static/media/${product.img}'>
                                 </td>
                                 <td style="width: 25em">
-                                    <h5>${data[0][2]}</h5><br>
+                                    <h5>${product.long_desc}</h5><br>
                                     <button class="btn btn-primary" style="font-size: 1.5em">Add to cart</button>
                                 </td>
                             </table>`);
@@ -116,8 +131,10 @@
           if (data.length > 0) { // match
             $("#resultData").html(`<tr style="white-space: nowrap; font-weight: bold;"><td>${data.length} results.</td><td style="text-decoration: underline; color: blue;" onclick=search("")> Cancel.</td></tr>`);
             for (var i = 0; i < data.length; i++) {
-                $("#resultData").append(`<tr onclick="showProduct(${data[i][0]})" class="productSearch"><td><img class="searchImg" src='static/media/${data[i][4]}'></td>
-                                         <td width="100%" style="text-align: left; padding-left: 1em">${data[i][1]}, ${data[i][3]} kr.</td>
+                const product = parseJSON(data[i]);
+
+                $("#resultData").append(`<tr onclick="showProduct(${product.id})" class="productSearch"><td><img class="searchImg" src='static/media/${product.img}'></td>
+                                         <td width="100%" style="text-align: left; padding-left: 1em"><h5>${product.name}, ${product.price} kr.</h5><i>${product.short_desc}</i></td>
                                          </tr>`);
             }
           } else { // no match

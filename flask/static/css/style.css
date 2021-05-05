@@ -9,18 +9,18 @@ body {
 	padding: 1em;
 	display: none;
 	font-size: 18px;
-	width: 26%;
+	width: 32%;
 	margin-left: 10em;
 	position: absolute;
 	background-color: white;
 }
 
 #inpSearch {
-	width: 50%;
+	width: 60%;
 }
 
 #inpSearch:focus {
-	width: 65%;
+	width: 80%;
 	transition: 0.25s;
 }
 
@@ -45,7 +45,6 @@ body {
 }
 
 .productSearch {
-	text-align: center;
 	width: 100%;
 	padding: 1em;
 }

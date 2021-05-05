@@ -33,7 +33,8 @@
             <div class="alert alert-danger" id="error" style="display: none;">Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif, webp.</div>
             <img id="preview" alt="No image" src="static/media/placeholder.jpg">
             <input type="text" class="form-control" id="inpName" placeholder="Product name" required>
-            <textarea class="form-control" id="inpDescription" placeholder="Description" required></textarea>
+            <input class="form-control" id="inpShortDesc" placeholder="Short description" required></input>
+            <textarea class="form-control" id="inpLongDesc" placeholder="Long description" required></textarea>
             <input type="number" step="0.01" class="form-control" id="inpPrice" placeholder="Price in kr." required>
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
@@ -82,12 +83,13 @@
         document.getElementById("frmProduct").onsubmit = function(evt) { // submit form
             evt.preventDefault();
 
-            $.post("/api/product/add", {name: $("#inpName").val(), description: $("#inpDescription").val(), price: $("#inpPrice").val(), img: filename}, function(data) {
+            $.post("/api/product/add", {name: $("#inpName").val(), short_desc: $("#inpShortDesc").val(), long_desc: $("#inpLongDesc").val(), price: $("#inpPrice").val(), img: filename}, function(data) {
                 alert("New product added!");
                 // reset form
                 $("#file").val("");
                 $("#inpName").val("");
-                $("#inpDescription").val("");
+                $("#inpShortDesc").val("");
+                $("#inpLongDesc").val("");
                 $("#inpPrice").val("");
                 filename = "placeholder.jpg";
                 $("#preview").attr('src',"static/media/"+filename);

@@ -93,12 +93,13 @@ def upload():
 def add():
     if request.method == "POST":
         name = request.form.get("name")
-        description = request.form.get("description")
+        short_desc = request.form.get("short_desc")
+        long_desc = request.form.get("long_desc")
         price = request.form.get("price")
         img = request.form.get("img")
         print(img)
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO product (name, description, price, img) VALUES (%s, %s, %s, %s)", [name, description, price, img])
+        cur.execute("INSERT INTO product (name, short_desc, long_desc, price, img) VALUES (%s, %s, %s, %s, %s)", [name, short_desc, long_desc, price, img])
         mysql.connection.commit()
         return "ok"
 
