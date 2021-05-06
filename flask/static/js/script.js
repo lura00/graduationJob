@@ -196,9 +196,7 @@ function addCart(productID) {
   var json_str = JSON.stringify(cart);
   createCookie('cart', json_str);
 
-  alert("La til vare i handlekurv");
-
-  console.log(getCookie('cart'));
+  alert("Product added to cart!");
 }
 
 function parseCookie() {
@@ -237,4 +235,8 @@ if (c_start != -1) {
 }
 }
 return "";
+}
+
+function showCart() {
+	console.log(parseCookie('cart'));
 }
