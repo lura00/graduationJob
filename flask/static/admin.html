@@ -40,5 +40,29 @@
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
     </div>
+
+<script>
+document.getElementById("frmProduct").onsubmit = function(evt) { // submit form
+	evt.preventDefault();
+
+	$.post("/api/product/add", {
+		name: $("#inpName").val(),
+		short_desc: $("#inpShortDesc").val(),
+		long_desc: $("#inpLongDesc").val(),
+		price: $("#inpPrice").val(),
+		img: filename
+	}, function(data) {
+		alert("New product added!");
+		// reset form
+		$("#file").val("");
+		$("#inpName").val("");
+		$("#inpShortDesc").val("");
+		$("#inpLongDesc").val("");
+		$("#inpPrice").val("");
+		filename = "placeholder.jpg";
+		$("#preview").attr('src', "static/media/" + filename);
+	})
+}
+</script>
 </body>
 </html>

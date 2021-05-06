@@ -151,29 +151,11 @@ function uploadMedia() {
 	});
 }
 
-document.getElementById("frmProduct").onsubmit = function(evt) { // submit form
-	evt.preventDefault();
-
-	$.post("/api/product/add", {
-		name: $("#inpName").val(),
-		short_desc: $("#inpShortDesc").val(),
-		long_desc: $("#inpLongDesc").val(),
-		price: $("#inpPrice").val(),
-		img: filename
-	}, function(data) {
-		alert("New product added!");
-		// reset form
-		$("#file").val("");
-		$("#inpName").val("");
-		$("#inpShortDesc").val("");
-		$("#inpLongDesc").val("");
-		$("#inpPrice").val("");
-		filename = "placeholder.jpg";
-		$("#preview").attr('src', "static/media/" + filename);
-	})
-}
-
 // CART
+function cartLength() { // update number of items in cart
+	let cart = parseCookie();
+	$("#lblCart").html(`Cart (${cart.length})`);
+}
 
 function addCart(productID) {
 
@@ -183,7 +165,6 @@ function addCart(productID) {
 
   for (var i = 0; i < cart.length; i++) {
     if (cart[i].productID == productID) {
-      console.log("update");
       cart[i].antall = cart[i].antall + 1;
       update = true;
     }
@@ -197,8 +178,10 @@ function addCart(productID) {
   createCookie('cart', json_str);
 
   alert("Product added to cart!");
+  $("#lblCart").html(`Cart (${cart.length})`);
 }
 
+// COOKIE
 function parseCookie() {
     const json = getCookie('cart');
     if (json != "") {
@@ -235,8 +218,4 @@ if (c_start != -1) {
 }
 }
 return "";
-}
-
-function showCart() {
-	console.log(parseCookie('cart'));
 }
