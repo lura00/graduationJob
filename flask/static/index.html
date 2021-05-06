@@ -39,7 +39,10 @@
       </select>
       <table class="table" id="tblProducts">
       </table>
-      <div id="product">
+      <div id="prodwrapper">
+        <div id="product" style="margin-left: 5em; padding-left: 1em; border-left: 2px solid lightgrey">
+        </div>
+        <div id="other-products"></div>
       </div>
     </div>
 
@@ -103,17 +106,20 @@
       $.get("/api/product/get/"+id, {}, function(data) {
         const product = parseJSON(data[0]);
 
-        $("#product").html(`<h1>${product.name}</h1>
-                            <p><strong>${product.short_desc}</strong></p>
-                            <h3>${product.price} kr</h3>
+        $("#product").html(`<h2>${product.name}</h2>
+                            <h4>${product.price} kr</h4>
+                            <p style="font-size: 1.2em"><i>${product.short_desc}</i></p>
                             <table id="producttbl">
-                                <td style="padding-right: 3em">
-                                    <img style="width: 20em; height: 20em" src='/static/media/${product.img}'>
-                                </td>
-                                <td style="width: 25em">
-                                    <h5>${product.long_desc}</h5><br>
-                                    <button class="btn btn-primary" style="font-size: 1.5em">Add to cart</button>
-                                </td>
+                                <tr>
+                                    <td><img style="width: 20em; height: 20em; margin-top: 1.5em" src='/static/media/${product.img}'></td>
+                                    <td style="width: 20em">
+                                    <p style="font-size: 1.2em; margin-left: 3em">${product.long_desc}</p>
+                                    <div style="text-align: center; width: 108%"><button class="btn btn-primary" style="font-size: 1.7em; margin-top: .5em; width: 7em">Add to cart</button></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td ></td>
+                                </tr>
                             </table>`);
       })
     }
