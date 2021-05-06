@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Webstore</title>
+    <title>Webstore - cart</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="static/js/script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -21,7 +21,7 @@
       </div>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/cart">Cart</a>
+          <a class="nav-link active" href="/cart">Cart</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin">Admin</a>
@@ -31,20 +31,7 @@
     <table class="resultData table-responsive" id="resultData"></table>
 
     <div class="wrapper">
-      <h4 style="margin-top: 1em;" id="headerSort">Sort products</h4>
-      <select class="form-control" onchange="orderProducts()" id="selectOrder">
-        <option>Price (low - high)</option>
-        <option>Price (high - low)</option>
-        <option>Name</option>
-        <option>Recently added</option>
-      </select>
-      <table class="table" id="tblProducts">
-      </table>
-      <div id="prodwrapper">
-        <div id="product" style="margin-left: 5em; padding-left: 1em; border-left: 2px solid lightgrey">
-        </div>
-        <div id="other-products"></div>
-      </div>
+      <h3>My cart</h3>
     </div>
   </body>
 </html>

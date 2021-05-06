@@ -26,7 +26,12 @@ def index():
 # admin page
 @app.route('/admin')
 def admin():
-    return render_template("admin.html");
+    return render_template("admin.html")
+
+# cart page
+@app.route('/cart')
+def cart():
+    return render_template("cart.html")
 
 # get product by ID
 @app.route('/api/product/get/<int:id>')

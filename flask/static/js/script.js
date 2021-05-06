@@ -68,7 +68,7 @@ function showProduct(id) {
                                     <td><img style="width: 20em; height: 20em; margin-top: 1.5em" src='/static/media/${product.img}'></td>
                                     <td style="width: 20em">
                                     <p style="font-size: 1.2em; margin-left: 3em">${product.long_desc}</p>
-                                    <div style="text-align: center; width: 108%"><button class="btn btn-primary" style="font-size: 1.7em; margin-top: .5em; width: 7em">Add to cart</button></div>
+                                    <div style="text-align: center; width: 108%"><button class="btn btn-primary" onclick="addCart(${product.id})" style="font-size: 1.7em; margin-top: .5em; width: 7em">Add to cart</button></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -171,4 +171,70 @@ document.getElementById("frmProduct").onsubmit = function(evt) { // submit form
 		filename = "placeholder.jpg";
 		$("#preview").attr('src', "static/media/" + filename);
 	})
+}
+
+// CART
+
+function addCart(productID) {
+
+  let cart = parseCookie();
+
+  let update = false;
+
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].productID == productID) {
+      console.log("update");
+      cart[i].antall = cart[i].antall + 1;
+      update = true;
+    }
+  }
+
+  if (!update) {
+    cart.push({productID: productID, antall: 1});
+  }
+
+  var json_str = JSON.stringify(cart);
+  createCookie('cart', json_str);
+
+  alert("La til vare i handlekurv");
+
+  console.log(getCookie('cart'));
+}
+
+function parseCookie() {
+    const json = getCookie('cart');
+    if (json != "") {
+        // hvis cookie cart ikke er tom
+        return JSON.parse(json);
+    } else {
+      return [];
+    }
+}
+
+function createCookie(name, value, days) {
+  var expires;
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toGMTString();
+  } else {
+  expires = "";
+  }
+  document.cookie = name + "=" + value + expires + "; path=/; SameSite=Lax";
+}
+
+
+function getCookie(c_name) {
+if (document.cookie.length > 0) {
+c_start = document.cookie.indexOf(c_name + "=");
+if (c_start != -1) {
+  c_start = c_start + c_name.length + 1;
+  c_end = document.cookie.indexOf(";", c_start);
+  if (c_end == -1) {
+      c_end = document.cookie.length;
+  }
+  return unescape(document.cookie.substring(c_start, c_end));
+}
+}
+return "";
 }
