@@ -23,7 +23,7 @@ DELETE FROM adminLogin;
 
 INSERT INTO adminLogin (username, pwd) VALUES ("admin", "password");
 
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football boots", "Adidas boots that fits all genders. Size: 43.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 500.0, "football-boots.jpg");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football boots", "Adidas boots that fits all genders", "color: black, size: 42, v2018 edition"  , 500.0, "football-boots.jpg");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Bicycle", "Fast racing bike from Jamis. Weight: 12 kg.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",  4999.0, "bicycle.png");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Snowboard", "Great beginner board from Jones. Length: 170 cm.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 3999.0, "snowboard.webp");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football", "Offical FIFA football! Medium size.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 200.0, "football.jpg");
