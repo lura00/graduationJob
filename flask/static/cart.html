@@ -36,8 +36,12 @@
 
 
     <script>
+      let cart = [];
+
       function showCart() {
-	    const cart = parseCookie('cart');
+	    cart = parseCookie('cart');
+
+	    $("#tblCart").html("");
 
 	    for (let i = 0; i < cart.length; i++) {
 		  $.get("/api/product/get/"+cart[i].productID, {}, function(data) {
@@ -46,7 +50,7 @@
 
 		      $("#tblCart").append(`
 		              <tr style="margin-left: 1em">
-		              <td><button style="margin-left: 2em" onclick="deleteItem()" class="btn-close"></button></td>
+		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn-close"></button></td>
                       <td><img style="width: 10em; height: 10em; margin-left: 1em" src='/static/media/${product.img}'></td>
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
                       <td><button style=" font-size: 1.2em; margin-left: 2em">+- button</button> </td>
@@ -61,9 +65,18 @@
 		  });
 	    }
       }
-      function deleteItem() {
+      function deleteItem(productID) {
+        for (var i = 0; i < cart.length; i++) {
+          if (cart[i].productID === productID) {
+            cart.splice(i, 1);
+          }
+        }
 
-      }
+        var json_str = JSON.stringify(cart);
+        createCookie('cart', json_str);
+
+        showCart();
+}
     </script>
   </body>
 </html>
