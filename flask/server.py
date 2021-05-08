@@ -41,6 +41,14 @@ def get(id):
     myresult = cur.fetchall()
     return jsonify(myresult)
 
+# get product by ID
+@app.route('/api/product/get/random')
+def getRandom():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM product ORDER BY RAND() LIMIT 1")
+    myresult = cur.fetchall()
+    return jsonify(myresult)
+
 # get all products
 @app.route('/api/product/get')
 def getAll():

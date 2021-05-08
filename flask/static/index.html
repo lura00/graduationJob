@@ -41,10 +41,51 @@
       <table class="table" id="tblProducts">
       </table>
       <div id="prodwrapper">
-        <div id="product" style="margin-left: 5em; padding-left: 1em; border-left: 2px solid lightgrey">
+        <div id="product" style="float: left; margin-left: 5em; padding-left: 1em; border-left: 2px solid lightgrey">
         </div>
-        <div id="other-products"></div>
+        <div id="other-products" style="float: right; border-left: 2px solid lightgrey; width: 35%; padding-left: 1em;">
+        </div>
       </div>
     </div>
   </body>
+<script>
+  // show specific product
+function showProduct(id) {
+	$("#headerSort").css("display", "none");
+	$("#resultData").css("display", "none");
+	$("#tblProducts").css("display", "none");
+	$("#selectOrder").css("opacity", "0");
+	$("#selectOrder").css("pointer-events", "none");
+	$("#product").css("display", "block");
+
+	$.get("/api/product/get/" + id, {}, function(data) {
+		const product = parseJSON(data[0]);
+
+		$("#product").html(`<h2>${product.name}</h2>
+                            <h4>${product.price} kr</h4>
+                            <p style="font-size: 1.2em"><i>${product.short_desc}</i></p>
+                            <table id="producttbl">
+                                <tr>
+                                    <td><img style="width: 20em; height: 20em; margin-top: 1.5em" src='/static/media/${product.img}'></td>
+                                    <td style="width: 20em">
+                                    <p style="font-size: 1.2em; margin-left: 3em">${product.long_desc}</p>
+                                    <div style="text-align: center; width: 108%"><button class="btn btn-primary" onclick="addCart(${product.id})" style="font-size: 1.7em; margin-top: .5em; width: 7em">Add to cart</button></div>
+                                    </td>
+                                </tr>
+                            </table>`);
+	})
+
+    $("#other-products").html("<h3>Relatable products</h3>");
+
+	for (let i = 0; i < 3; i++) {
+	  $.get("/api/product/get/random", {}, function (data) {
+	    const product = parseJSON(data[0]);
+	    $("#other-products").append(`<h5 style="margin-top: 1em;">${product.name}</h5>
+                                     <p>${product.price} kr</p>
+                                     <img src='/static/media/${product.img}' height="150px">`);
+
+      });
+    }
+}
+</script>
 </html>
