@@ -73,3 +73,21 @@ body {
 #product {
 	display: none;
 }
+
+#other-products {
+	float: right;
+	border-left: 2px solid lightgrey;
+	width: 35%;
+	padding-left: 1em;
+}
+
+#rel-product {
+	border: 1px solid lightgrey;
+	padding: 0.5em;
+}
+
+#rel-product:hover {
+	color: blue;
+	text-decoration: underline;
+	border: 1px solid black;
+}

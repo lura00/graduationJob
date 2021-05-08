@@ -48,36 +48,6 @@ function parseJSON(data) {
 	};
 }
 
-// show specific product
-function showProduct(id) {
-	$("#headerSort").css("display", "none");
-	$("#resultData").css("display", "none");
-	$("#tblProducts").css("display", "none");
-	$("#selectOrder").css("opacity", "0");
-	$("#selectOrder").css("pointer-events", "none");
-	$("#product").css("display", "block");
-
-	$.get("/api/product/get/" + id, {}, function(data) {
-		const product = parseJSON(data[0]);
-
-		$("#product").html(`<h2>${product.name}</h2>
-                            <h4>${product.price} kr</h4>
-                            <p style="font-size: 1.2em"><i>${product.short_desc}</i></p>
-                            <table id="producttbl">
-                                <tr>
-                                    <td><img style="width: 20em; height: 20em; margin-top: 1.5em" src='/static/media/${product.img}'></td>
-                                    <td style="width: 20em">
-                                    <p style="font-size: 1.2em; margin-left: 3em">${product.long_desc}</p>
-                                    <div style="text-align: center; width: 108%"><button class="btn btn-primary" onclick="addCart(${product.id})" style="font-size: 1.7em; margin-top: .5em; width: 7em">Add to cart</button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td ></td>
-                                </tr>
-                            </table>`);
-	})
-}
-
 // search products
 function search(val) {
 
