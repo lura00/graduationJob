@@ -9,7 +9,8 @@
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
     <style>
       #cartItem:hover{
-        background-color: #F3F3F3;
+        background-color: #E6E6E6;
+        transition: .3s;
       }
     </style>
   </head>
@@ -36,7 +37,7 @@
 
     <div class="wrapper" style="margin-left: 9em">
       <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
-      <div id="emptyMsg" style="font-size: 1.8em; display: none;" class="alert alert-info">Cart is empty</div>
+      <div id="emptyMsg" style="font-size: 1.8em; display: none; width: 90%" class="alert alert-info">Cart is empty</div>
       <div id="tblwrapper" style="border-left: 3px solid grey">
         <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
         </table>
@@ -75,7 +76,7 @@
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
                       <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
-                      <span id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
+                      <span style="font-size: 1.1em" id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
                       <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true, ${product.price})">+</button></td>
                       <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
                       <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
