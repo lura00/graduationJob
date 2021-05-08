@@ -77,15 +77,21 @@ function showProduct(id) {
 
     $("#other-products").html("<h3>Relatable products</h3>");
 
-	for (let i = 0; i < 3; i++) {
-	  $.get("/api/product/get/random", {}, function (data) {
-	    const product = parseJSON(data[0]);
-	    $("#other-products").append(`<h5 style="margin-top: 1em;">${product.name}</h5>
-                                     <p>${product.price} kr</p>
-                                     <img src='/static/media/${product.img}' height="150px">`);
+	$.get("/api/product/get/random", {}, function (data) {
+	  for (let i = 0; i < data.length; i++) {
+	    const product = parseJSON(data[i]);
+	    $("#other-products").append(`<div style="border: 1px solid lightgrey;" onclick="showProduct(${product.id})">
+                                     <h5 style="margin-top: 1em;">${product.name}, ${product.price} kr</h5>
+                                     <p><i>${product.short_desc}</i></p>
+                                     <img src='/static/media/${product.img}' height="150px">
+                                     </div>`);
+      }
+    })
 
-      });
-    }
+
+
+
+
 }
 </script>
 </html>
