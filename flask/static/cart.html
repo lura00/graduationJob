@@ -36,9 +36,9 @@
 
     <div class="wrapper" style="margin-left: 9em">
       <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
-      <div id="emptyMsg" style="font-size: 1.8em">Cart is empty</div>
+      <div id="emptyMsg" style="font-size: 1.8em; display: none;" class="alert alert-info">Cart is empty</div>
       <div id="tblwrapper" style="border-left: 3px solid grey">
-        <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
+        <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em; width: 60%;">
         </table>
       </div>
     </div>
@@ -46,16 +46,25 @@
 
     <script>
       let cart = [];
+      let cookieLoad = true;
 
       function showCart() {
-	    cart = parseCookie('cart');
+
+        if (cookieLoad) {
+          cart = parseCookie('cart');
+          cookieLoad = false;
+        }
 
 	    $("#lblCart").html(`Cart (${cart.length})`);
 
-	    $("#tblCart").html("");
-
-
-	    for (let i = 0; i < cart.length; i++) {
+        if (cart.length === 0) {
+          // cart is empty
+          $("#tblCart").html("");
+          $("#emptyMsg").css("display","block");
+        } else {
+          // cart is not empty
+          $("#tblCart").html("<tr style='text-align: center;'><th>Delete</th><th>Image</th><th>Name</th><th>Quantity</th></th><th>Unit price</th><th>Price</th></tr>");
+          for (let i = 0; i < cart.length; i++) {
 		  $.get("/api/product/get/"+cart[i].productID, {}, function(data) {
 		      let product = parseJSON(data[0]);
 		      console.log(product);
@@ -65,16 +74,16 @@
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
-                      <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false)">-</button> ${cart[i].antall}
-                      <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true)">+</button></td>
+                      <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
+                      <span id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
+                      <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true, ${product.price})">+</button></td>
                       <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
-                      <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
+                      <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
-
-
               `);
 		  });
 	    }
+        }
       }
       function deleteItem(productID) {
         for (var i = 0; i < cart.length; i++) {
@@ -89,16 +98,23 @@
         showCart();
       }
       
-      function editCart(productID, increment) {
+      function editCart(productID, increment, price) {
         for (var i = 0; i < cart.length; i++) {
           if (cart[i].productID === productID) {
             if (increment) {
               cart[i].antall = cart[i].antall + 1;
+              $("#lblAntall"+cart[i].productID).html(cart[i].antall);
+              let newPrice = price * cart[i].antall;
+              $("#lblPrice"+cart[i].productID).html(newPrice+" kr");
             } else {
               if (cart[i].antall === 1) {
                 cart.splice(i, 1);
+                showCart();
               } else {
                 cart[i].antall = cart[i].antall - 1;
+                $("#lblAntall"+cart[i].productID).html(cart[i].antall);
+                let newPrice = price * cart[i].antall;
+                $("#lblPrice"+cart[i].productID).html(newPrice+" kr");
               }
             }
           }
@@ -106,8 +122,6 @@
 
   var json_str = JSON.stringify(cart);
   createCookie('cart', json_str);
-
-  showCart();
 }
     </script>
   </body>
