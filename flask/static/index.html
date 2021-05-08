@@ -75,12 +75,12 @@ function showProduct(id) {
                             </table>`);
 	})
 
-    $("#other-products").html("<h3>Relatable products</h3>");
+    $("#other-products").html("<h3>Related products</h3>");
 
-	$.get("/api/product/get/random", {}, function (data) {
+	$.get("/api/product/get/random", {id: id}, function (data) {
 	  for (let i = 0; i < data.length; i++) {
 	    const product = parseJSON(data[i]);
-	    $("#other-products").append(`<div style="border: 1px solid lightgrey;" onclick="showProduct(${product.id})">
+	    $("#other-products").append(`<div id="rel-product" onclick="showProduct(${product.id})">
                                      <h5 style="margin-top: 1em;">${product.name}, ${product.price} kr</h5>
                                      <p><i>${product.short_desc}</i></p>
                                      <img src='/static/media/${product.img}' height="150px">
