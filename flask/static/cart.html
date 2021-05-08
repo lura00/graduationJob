@@ -30,8 +30,11 @@
     </nav>
 
     <div class="wrapper" style="margin-left: 9em">
-      <h2 style="margin-top: 1em; margin-bottom: 2em">My cart</h2>
-      <table style="border-left: 2px solid grey" id="tblCart"></table>
+      <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
+      <div id="tblwrapper" style="border-left: 2px solid grey">
+        <table id="tblCart" style="margin-bottom: 2em">
+        </table>
+      </div>
     </div>
 
 
@@ -52,9 +55,11 @@
 		      var fullPrice =  cart[i].antall*product.price;
 
 		      $("#tblCart").append(`
-		              <tr style="margin-left: 1em">
+                      <tr> <div style="width: 4em; height: 1px; background-color: black"></div> </tr>
+		              <tr>
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn-close"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
+
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
                       <td><button class="btn btn-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false)">-</button> ${cart[i].antall} 
                       <button class="btn btn-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true)">+</button></td>
