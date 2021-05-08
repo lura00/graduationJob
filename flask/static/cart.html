@@ -7,6 +7,11 @@
     <script src="static/js/script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
+    <style>
+      #cartItem:hover{
+        background-color: #F3F3F3;
+      }
+    </style>
   </head>
   <body onload="showCart(); cartLength();">
     <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
@@ -31,8 +36,9 @@
 
     <div class="wrapper" style="margin-left: 9em">
       <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
-      <div id="tblwrapper" style="border-left: 2px solid grey">
-        <table id="tblCart" style="margin-bottom: 2em">
+      <div id="emptyMsg" style="font-size: 1.8em">Cart is empty</div>
+      <div id="tblwrapper" style="border-left: 3px solid grey">
+        <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
         </table>
       </div>
     </div>
@@ -48,24 +54,23 @@
 
 	    $("#tblCart").html("");
 
+
 	    for (let i = 0; i < cart.length; i++) {
 		  $.get("/api/product/get/"+cart[i].productID, {}, function(data) {
 		      let product = parseJSON(data[0]);
 		      console.log(product);
 		      var fullPrice =  cart[i].antall*product.price;
-
 		      $("#tblCart").append(`
-                      <tr> <div style="width: 4em; height: 1px; background-color: black"></div> </tr>
-		              <tr>
-		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn-close"></button></td>
+		              <tr id="cartItem" style="height:12em; border-top: 1px solid grey">
+		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
-
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
-                      <td><button class="btn btn-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false)">-</button> ${cart[i].antall} 
-                      <button class="btn btn-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true)">+</button></td>
+                      <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false)">-</button> ${cart[i].antall}
+                      <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true)">+</button></td>
                       <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
                       <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
+
 
               `);
 		  });
