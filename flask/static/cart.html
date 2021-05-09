@@ -65,11 +65,13 @@
         } else {
           // cart is not empty
           $("#tblCart").html("<tr style='text-align: center;'><th>Delete</th><th>Image</th><th>Name</th><th>Quantity</th></th><th>Unit price</th><th>Price</th></tr>");
+          var totalPrice = 0;
           for (let i = 0; i < cart.length; i++) {
 		  $.get("/api/product/get/"+cart[i].productID, {}, function(data) {
 		      let product = parseJSON(data[0]);
 		      console.log(product);
 		      var fullPrice =  cart[i].antall*product.price;
+		      totalPrice += fullPrice;
 		      $("#tblCart").append(`
 		              <tr id="cartItem" style="height:12em; border-top: 1px solid grey">
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
@@ -82,6 +84,9 @@
                       <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
               `);
+		      if(i === cart.length-1) {
+		        $(".wrapper").append(` <h3>Total price: ${totalPrice}</h3>`);
+              }
 		  });
 	    }
         }
