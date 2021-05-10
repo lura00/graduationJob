@@ -41,20 +41,19 @@
       <div id="tblwrapper" style="border-left: 3px solid grey">
         <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
         </table>
+        <span id="lblTotalPrice"></span>
       </div>
     </div>
 
 
     <script>
       let cart = [];
-      let cookieLoad = true;
+      let products = [];
 
       function showCart() {
 
-        if (cookieLoad) {
-          cart = parseCookie('cart');
-          cookieLoad = false;
-        }
+        cart = parseCookie('cart');
+        products = [];
 
 	    $("#lblCart").html(`Cart (${cart.length})`);
 
@@ -64,15 +63,16 @@
           $("#emptyMsg").css("display","block");
         } else {
           // cart is not empty
+          let total = 0;
           $("#tblCart").html("<tr style='text-align: center;'><th>Delete</th><th>Image</th><th>Name</th><th>Quantity</th></th><th>Unit price</th><th>Price</th></tr>");
-          var totalPrice = 0;
           for (let i = 0; i < cart.length; i++) {
-		  $.get("/api/product/get/"+cart[i].productID, {}, function(data) {
-		      let product = parseJSON(data[0]);
-		      console.log(product);
-		      var fullPrice =  cart[i].antall*product.price;
-		      totalPrice += fullPrice;
-		      $("#tblCart").append(`
+		    $.get("/api/product/get/"+cart[i].productID, {}, function(data) { // get products from cart
+		        let product = parseJSON(data[0]);
+		        products.push(product);
+		        var fullPrice =  cart[i].antall*product.price;
+		        total += fullPrice;
+
+		        $("#tblCart").append(`
 		              <tr id="cartItem" style="height:12em; border-top: 1px solid grey">
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
@@ -84,13 +84,28 @@
                       <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
               `);
+<<<<<<< Updated upstream
 		      if(i === cart.length-1) {
 		        $("#tblCart").append(` <h3>Total price: ${totalPrice}</h3>`);
               }
 		  });
 	    }
+=======
+		        $("#lblTotalPrice").html(`<h3>Total: ${total} kr`);
+		    });
+          }
+>>>>>>> Stashed changes
         }
       }
+
+      function calcFullPrice() {
+        let sum = 0;
+        for (let i = 0; i < products.length; i++) {
+          sum += products[i].price*cart[i].antall;
+        }
+        $("#lblTotalPrice").html(`<h3>Total: ${sum} kr</h3>`);
+      }
+
       function deleteItem(productID) {
         for (var i = 0; i < cart.length; i++) {
           if (cart[i].productID === productID) {
@@ -98,36 +113,41 @@
           }
         }
 
-        var json_str = JSON.stringify(cart);
-        createCookie('cart', json_str);
-
+        writeCookie();
         showCart();
       }
       
       function editCart(productID, increment, price) {
         for (var i = 0; i < cart.length; i++) {
           if (cart[i].productID === productID) {
-            if (increment) {
+            if (increment) { // increase item
               cart[i].antall = cart[i].antall + 1;
-              $("#lblAntall"+cart[i].productID).html(cart[i].antall);
               let newPrice = price * cart[i].antall;
+              $("#lblAntall"+cart[i].productID).html(cart[i].antall);
               $("#lblPrice"+cart[i].productID).html(newPrice+" kr");
+              writeCookie();
+              calcFullPrice();
             } else {
-              if (cart[i].antall === 1) {
+              if (cart[i].antall === 1) { // delete item
                 cart.splice(i, 1);
+                writeCookie();
                 showCart();
-              } else {
+              } else { // decrease item
                 cart[i].antall = cart[i].antall - 1;
-                $("#lblAntall"+cart[i].productID).html(cart[i].antall);
                 let newPrice = price * cart[i].antall;
+                $("#lblAntall"+cart[i].productID).html(cart[i].antall);
                 $("#lblPrice"+cart[i].productID).html(newPrice+" kr");
+                writeCookie();
+                calcFullPrice();
               }
             }
           }
       }
+}
 
-  var json_str = JSON.stringify(cart);
-  createCookie('cart', json_str);
+function writeCookie() {
+        let json_str = JSON.stringify(cart);
+        createCookie('cart', json_str);
 }
     </script>
   </body>
