@@ -23,15 +23,15 @@ DELETE FROM adminLogin;
 
 INSERT INTO adminLogin (username, pwd) VALUES ("admin", "password");
 
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football boots", "color: black, size: 42, v2018 edition", "Adidas boots that fits, Mens edition"  , 500.0, "football-boots.jpg");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football boots", "adidas Performance, color: black/action white, size: 42", "X GHOSTED 4.0 FOOTBALL BOOTS FIRM GROUND (2016)"  , 500.0, "football-boots.jpg");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Bicycle", " weight 12 kg, color: black/blue, slim edition ", "Fast racing bike from Jamis. Includes 16 gears for optimal speed ",  4999.0, "bicycle.png");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Snowboard", " Length: 170 cm - unisex editon.", "JONES TEAM 170 2021 SNOWBOARD", 3999.0, "snowboard.webp");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Football", "Medium size - fotball", " Offical Adidas fotball - fifa World cup brazil editon  ", 200.0, "football.jpg");
 
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Basketball", "Great value basketball! Large size.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 399.0, "basketball.png");
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Tennis racket", "Wilson racket for the pros! Weight: 300g.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 500.0, "tennis-racket.jpg");
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Running shoes", "All-terrain running shoes from Nike. Size: 45. ", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 200.0, "running-shoes.jpg");
-INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Sneakers"," Addidas yeezyz 350 v2. size: 43.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 3500, "sneakers.jpg");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Basketball", "NBA OFFICIAL GAME BALL", "Official NBA size: 7 and weight: 29.5. Designed for indoor play only", 399.0, "basketball.png");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Tennis racket", "Weight: 300g, Length: 685 mm, Balance: 315", "WILSON PRO STAFF RF 97 AUTOGRAPH V13.0 ", 500.0, "tennis-racket.jpg");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Running shoes", "Size: 43, weight: 228g, color: black/white/grey", "Nike Performance ZOOM FLY 3 - Neutral running shoes", 200.0, "running-shoes.jpg");
+INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Sneakers","size: 43, color black/red ", "adidas Yeezy Boost 350 V2 Pirate Black (2018)", 3500, "sneakers.jpg");
 
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Glowing basketball", "Holographic Glowing Reflective Basketball", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 699, "glowing-basketball.webp");
 INSERT INTO product (name, short_desc, long_desc, price, img) VALUES ("Skateboard", "skateboard for grown ups", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 587, "skateboard.jpg");
