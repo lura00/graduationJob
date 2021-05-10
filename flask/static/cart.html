@@ -77,24 +77,16 @@
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
-                      <td><button class="btn btn-outline-danger" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
+                      <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
                       <span style="font-size: 1.1em" id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
-                      <button class="btn btn-outline-success" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true, ${product.price})">+</button></td>
+                      <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true, ${product.price})">+</button></td>
                       <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
                       <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
               `);
-<<<<<<< Updated upstream
-		      if(i === cart.length-1) {
-		        $("#tblCart").append(` <h3>Total price: ${totalPrice}</h3>`);
-              }
-		  });
-	    }
-=======
 		        $("#lblTotalPrice").html(`<h3>Total: ${total} kr`);
 		    });
           }
->>>>>>> Stashed changes
         }
       }
 
