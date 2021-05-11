@@ -35,8 +35,8 @@
       </ul>
     </nav>
 
-    <div class="wrapper" style="margin-left: 9em">
-      <div id="other-products" style="display: none;">
+    <div class="wrapper" style="margin-left: 7em">
+      <div id="other-products" style="display: none; margin-left: 1em; padding-left: 1.5em">
         <h3>Coupon code</h3>
           <p>Use the code "batman" for 100% off!</p>
           <div class="input-group mb-3">
@@ -57,7 +57,7 @@
       <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
       <div id="emptyMsg" style="font-size: 1.8em; display: none; width: 90%" class="alert alert-info">Cart is empty</div>
       <div id="tblwrapper" style="border-left: 3px solid grey">
-        <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
+        <table id="tblCart" style="margin-bottom: 2em; margin-left: 2em">
         </table>
         <span id="lblTotalPrice"></span>
         <span id="lblCouponPrice" style="display: none;"><h3 style="margin-left: 2.3em">Total: 0 kr</h3></span>
@@ -99,12 +99,12 @@
 		              <tr id="cartItem" style="height:12em; border-top: 1px solid grey">
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
                       <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
-                      <td style="text-align: center" ><p style="width: 9em; font-size:1.4em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
+                      <td style="text-align: center" ><p style="width: 9em; font-size:1.3em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
                       <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
                       <span style="font-size: 1.1em" id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
                       <button class="btn btn-outline-primary" style="margin-left: .5em" onclick="editCart(${cart[i].productID}, true, ${product.price})">+</button></td>
-                      <td><p style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
-                      <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.4em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
+                      <td><p style="font-size: 1.3em; margin-left: 2em; margin-bottom: 0">${product.price} kr</p></td>
+                      <td><p id="lblPrice${cart[i].productID}" style="font-size: 1.3em; margin-left: 2em; margin-bottom: 0">${fullPrice} kr</p> </td>
                       </tr>
               `);
 		        $("#lblTotalPrice").html(`<h3 style="margin-left: 2.3em">Total: ${total} kr</h3>`);
