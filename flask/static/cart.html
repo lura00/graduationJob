@@ -36,12 +36,31 @@
     </nav>
 
     <div class="wrapper" style="margin-left: 9em">
+      <div id="other-products" style="display: none;">
+        <h3>Coupon code</h3>
+          <p>Use the code "batman" for 100% off!</p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Coupon code" id="inpCoupon">
+            <div class="input-group-append">
+              <button class="btn btn-primary" onclick="verifyCoupon()">Apply code</button>
+            </div>
+          </div>
+          <div id="lblCoupon"></div>
+        <form id="frmBilling">
+          <h3>Billing info</h3>
+          <input type="text" id="inpName" class="form-control" placeholder="Full name" required>
+          <input type="email" id="inpEmail" class="form-control" placeholder="Email" required>
+          <input type="text" id="inpAddress" class="form-control" placeholder="Address" required>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1em;">Place order</button>
+        </form>
+      </div>
       <h2 style="margin-top: 1em; margin-bottom: 1.5em">My cart</h2>
       <div id="emptyMsg" style="font-size: 1.8em; display: none; width: 90%" class="alert alert-info">Cart is empty</div>
       <div id="tblwrapper" style="border-left: 3px solid grey">
         <table id="tblCart" style="margin-bottom: 2em; margin-left: 4em">
         </table>
         <span id="lblTotalPrice"></span>
+        <span id="lblCouponPrice" style="display: none;"><h3 style="margin-left: 2.3em">Total: 0 kr</h3></span>
       </div>
     </div>
 
@@ -49,6 +68,7 @@
     <script>
       let cart = [];
       let products = [];
+      let total;
 
       function showCart() {
 
@@ -62,9 +82,11 @@
           $("#tblCart").html("");
           $("#emptyMsg").css("display","block");
           $("#lblTotalPrice").css("display","none");
+          $("#other-products").css("display","none");
         } else {
           // cart is not empty
-          let total = 0;
+          total = 0;
+          $("#other-products").css("display","block");
           $("#tblCart").html("<tr style='text-align: center;'><th>Delete</th><th>Image</th><th>Name</th><th>Quantity</th></th><th>Unit price</th><th>Price</th></tr>");
           for (let i = 0; i < cart.length; i++) {
 		    $.get("/api/product/get/"+cart[i].productID, {}, function(data) { // get products from cart
@@ -96,6 +118,7 @@
         for (let i = 0; i < products.length; i++) {
           sum += products[i].price*cart[i].antall;
         }
+        total = sum;
         $("#lblTotalPrice").html(`<h3 style="margin-left: 2.3em">Total: ${sum} kr</h3>`);
       }
 
@@ -136,6 +159,37 @@
             }
           }
       }
+}
+
+function verifyCoupon() {
+        $("#lblCoupon").removeClass();
+        if ($("#inpCoupon").val() === "batman") {
+          $("#lblTotalPrice").css("text-decoration-line", "line-through");
+          $("#lblCouponPrice").css("display","block");
+          $("#lblCoupon").addClass("alert alert-info");
+          $("#lblCoupon").html("Code applied!");
+          $("#inpCoupon").attr("disabled",true);
+          total = 0;
+        } else {
+          $("#lblCoupon").addClass("alert alert-danger");
+          $("#lblCoupon").html("Invalid code!");
+        }
+}
+
+document.getElementById("frmBilling").onsubmit = function(evt) {
+        evt.preventDefault();
+        const c = {
+          name: $("#inpName").val(),
+          email: $("#inpEmail").val(),
+          address: $("#inpAddress").val()
+        };
+
+        $("#other-products").html(`<h3>Thank you ${c.name}!</h3>
+                                    <p>Order has been placed!</p>
+                                    <p>Full name: ${c.name}<br>
+                                    Email: ${c.email}<br>
+                                    Address: ${c.address}</p>
+                                    <p>Your total was: ${total} kr</p>`);
 }
 
 function writeCookie() {
