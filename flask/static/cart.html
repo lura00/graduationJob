@@ -61,6 +61,7 @@
           // cart is empty
           $("#tblCart").html("");
           $("#emptyMsg").css("display","block");
+          $("#lblTotalPrice").css("display","none");
         } else {
           // cart is not empty
           let total = 0;
@@ -95,7 +96,7 @@
         for (let i = 0; i < products.length; i++) {
           sum += products[i].price*cart[i].antall;
         }
-        $("#lblTotalPrice").html(`<h3>Total: ${sum} kr</h3>`);
+        $("#lblTotalPrice").html(`<h3 style="margin-left: 2.3em">Total: ${sum} kr</h3>`);
       }
 
       function deleteItem(productID) {
