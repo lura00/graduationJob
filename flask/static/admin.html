@@ -17,13 +17,33 @@
         }
     </style>
 </head>
-<body>
-    <div class="wrapper">
+<body onload="cartLength()">
+    <nav class="navbar navbar-dark navbar-expand bg-dark px-5">
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="navbar-brand" style="cursor:pointer" href="/">Webshop</a>
+        </li>
+      </ul>
+      <div class="form-inline px-4" style="width: 45%; opacity: 0; pointer-events: none">
+        <input style="border-left: 2px solid white" type="text" class="form-control" placeholder="Search after products..." oninput="search(this.value)" onclick="search(this.value)" id="inpSearch" disabled>
+      </div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/cart" id="lblCart">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/admin">Admin</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="wrapper" style="margin-top: 2em;">
         <!-- Login form -->
         <div class="form-group" id="frmLogin">
             <h3>Admin login</h3>
             <input type="text" class="form-control" id="inpUsername" placeholder="Admin username">
             <input type="password" class="form-control" id="inpPassword" placeholder="Password">
+            <div id="errorAdmin" class="alert alert-danger" style="display: none;">Invalid login. Try again.</div>
             <button type="submit" class="btn btn-primary" onclick="login()">Login</button>
         </div>
 

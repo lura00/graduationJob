@@ -89,9 +89,10 @@ function login() {
 		console.log(data);
 		if (data.length === 0) {
 			// login failed
-			alert("Login failed.")
+			$("#errorAdmin").css("display","block");
 		} else {
 			// login ok
+			$("#errorAdmin").css("display","none");
 			$("#frmLogin").css("display", "none");
 			$("#frmProduct").css("display", "block");
 		}

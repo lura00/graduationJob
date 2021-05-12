@@ -90,4 +90,15 @@ body {
 	color: blue;
 	text-decoration: underline;
 	border: 1px solid black;
+	cursor: pointer;
+}
+
+/* Admin page */
+#frmLogin {
+	width: 60%;
+	margin: auto;
+	padding: 2em;
+	background-color: lightgrey;
+	border-radius: 15px;
+	box-shadow: 5px 10px grey;
 }
