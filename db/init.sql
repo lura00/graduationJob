@@ -41,7 +41,7 @@ Insert INTO product (name, short_desc, long_desc, price, img) VALUES ("Infinity 
 Insert INTO product (name, short_desc, long_desc, price, img) VALUES ("Floorball club", " Stick Length: 100 cm", "Intermediate Sticks - 2020 Salming Aero Z Floorball Stick", 996, "floorball-club.jpg");
 Insert INTO product (name, short_desc, long_desc, price, img) VALUES ("Golf clubs", "Color: Black, weight: 3.8kg, Flex: regular ", "Cobra Golf 2019 Men''s XL Speed Complete Golf Set", 3799, "golf-clubs.jpg");
 Insert Into product (name, short_desc, long_desc, price, img) VALUES ("Badminton racket", " Tour Badminton Kit ", "Senston Badminton Rackets 4 Pack Badminton Set Including 2 Badminton Bags and 4 shuttlecocks.", 651, "badminton-racks.jpg");
-Insert Into product (name, short_desc, long_desc, price, img) VALUES ("Ice skating shoes", "Color: White, size between 36-42 EU", "American Athletic Shoe Girl''s Tricot Lined Ice Skates", 569, "ice-skate-shoes.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VALUES ("Ice skating shoes", "Color: White, size between 36-42 (EU)", "American Athletic Shoe Girl''s Tricot Lined Ice Skates", 569, "ice-skate-shoes.jpg");
 
 Insert Into product (name, short_desc, long_desc, price, img) VALUES ("Champoin backpack", "Height: 44cm and length: 32cm, Color: Black", "Champoin LEGACY BACKPACK - (2019)", 299, "champ-backpack.jpeg");
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Tracksuit", "color: black, size: M - (EU)", "ADIDAS COLOR CLASSICS PROMO BLACK TRACKSUIT", 350, "tracksuit.png");
@@ -49,9 +49,9 @@ Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Print T-s
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Long sleeved top - white", "Color: white: size: S - (EU) ", "Hummel LEGACY SUPUERIOR STREACH MENS - Long sleeved top (WHITE)", 200, "sleeve-white.png");
 
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Long sleeved top - black", "color: Black, size: M - (EU)", "Hummel LEGACY SUPUERIOR STREACH MENS - Long sleeved top (BLACK)", 195, "sleeve-black.png");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Training shorts", "Men's training shorts - black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 220, "training-shorts.webp");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Hoodie - black", "addidas Performance", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 379, "hoodie.jpg");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports shorts", " Nike sport shorts - black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 255, "sport-shorts.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Training shorts", "Color: black, size: M - (EU)", "PUMA Liga Core training shorts  - Mens", 220, "training-shorts.webp");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Hoodie - black", "Color: black, size: M - (EU)", "Adidas Performance Core Eleven Football Hoddie Sweat", 379, "hoodie.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports shorts", "color: black, size: M - (EU)", "Nike Performance Academy Unisex - Flex short", 255, "sport-shorts.jpg");
 
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Yoga mat", "MAT EVERYDAY UNISEX - Fitness / Yoga", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 630, "yoga-mat.jpg" );
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Goalkeeping gloves", "Nike Performance - red/white/black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 640, "gloves.webp");
