@@ -53,10 +53,10 @@ Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Training 
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Hoodie - black", "Color: black, size: M - (EU)", "Adidas Performance Core Eleven Football Hoddie Sweat", 379, "hoodie.jpg");
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports shorts", "color: black, size: M - (EU)", "Nike Performance Academy Unisex - Flex short", 255, "sport-shorts.jpg");
 
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Yoga mat", "MAT EVERYDAY UNISEX - Fitness / Yoga", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 630, "yoga-mat.jpg" );
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Goalkeeping gloves", "Nike Performance - red/white/black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 640, "gloves.webp");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Headband unisex" , "Under armor headband", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 140, "headband.jpg");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Drink bottle" , "Ardee sports drink   bottle - 2,2L", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 60, "bottle.jpeg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Yoga mat", "size: 6 mm, color: Purple", " Allround everyday unisex yoga mat - Lilac Purple", 630, "yoga-mat.jpg" );
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Goalkeeping gloves", "color: red/white/black, size: 4.5 - (EU)", "Adidas Mercurial  Goalkeeper Touch Elite", 640, "gloves.webp");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Headband unisex" , "Color: black, Size: One size - (EU)"," Under armor  Dri-Fit Fury Headband 3.0", 140, "headband.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Drink bottle" , "Sports drink bottle- 2,2L", "Ardee Big Performance Hypercharge Bottle - Unisex ", 60, "bottle.jpeg");
 
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Tracksuit bottoms", "Champion CUFF PANTS - black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 263, "tracksuit-bottom.jpg");
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports socks pack", "FILA - Sports socks . white", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 130, "socks.jpg");
