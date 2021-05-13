@@ -58,5 +58,5 @@ Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Goalkeepi
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Headband unisex" , "Color: black, Size: One size - (EU)"," Under armor  Dri-Fit Fury Headband 3.0", 140, "headband.jpg");
 Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Drink bottle" , "Sports drink bottle- 2,2L", "Ardee Big Performance Hypercharge Bottle - Unisex ", 60, "bottle.jpeg");
 
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Tracksuit bottoms", "Champion CUFF PANTS - black", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 263, "tracksuit-bottom.jpg");
-Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports socks pack", "FILA - Sports socks . white", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 130, "socks.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Tracksuit bottoms", "Color: black, size: M - (EU)", "Champion Fleece Cuff Pants", 263, "tracksuit-bottom.jpg");
+Insert Into product (name, short_desc, long_desc, price, img) VAlUES ("Sports socks pack", "size: 39 - 42 (EU), color: black/white/grey ", "FILA Crew 3 pair plain socks  - unisex", 130, "socks.jpg");
