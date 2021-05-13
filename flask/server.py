@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask, render_template, jsonify, request, abort
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
@@ -118,4 +117,4 @@ def add():
         return "ok"
 
 if __name__ == "__main__":
-    app.run(host ='0.0.0.0', port = 5001, debug = True)
+    app.run(host ='0.0.0.0', port = 5001, debug = True, ssl_context=('cert/cert.pem', 'cert/key.pem'))
