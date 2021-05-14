@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Webstore</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="static/js/script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="static/css/style.css" type="text/css" rel="stylesheet">
@@ -44,6 +46,21 @@
         <div id="product" style="float: left; margin-left: 5em; padding-left: 1em; border-left: 3px solid grey">
         </div>
         <div id="other-products" style="float: right; border-left: 2px solid lightgrey; width: 35%; padding-left: 1em;">
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="divCartAdd" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="margin: auto;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <img src="https://images.assetsdelivery.com/compings_v2/alonastep/alonastep1605/alonastep160500181.jpg" height="150px" width="150px" style="margin: auto;">
+          <div class="modal-header text-center">
+            <h3 class="modal-title w-100" style="text-align: center;"></h3>
+          </div>
+          <div id="cartPrev" style="text-align: center;"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="window.location='/cart'">View cart</button>
+            <button type="button" class="btn btn-secondary" onclick="$('#divCartAdd').modal('hide')">Close</button>
+         </div>
         </div>
       </div>
     </div>

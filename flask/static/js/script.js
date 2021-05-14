@@ -20,7 +20,6 @@ function view(order) {
 	$.get("/api/product/get", {
 		order: order
 	}, function(data) {
-		console.log(data);
 
 		$("#tblProducts").html(`<h4>Displaying ${data.length} products.</h4>`);
 		for (var i = 0; i < data.length; i++) {
@@ -58,7 +57,6 @@ function search(val) {
 			keyword: val
 		}, function(data) {
 			// search db
-			console.log(data);
 
 			if (data.length > 0) { // match
 				$("#resultData").html(`<tr style="white-space: nowrap; font-weight: bold;"><td>${data.length} results.</td><td style="text-decoration: underline; color: blue;" onclick=search("")> Cancel.</td></tr>`);
@@ -86,7 +84,6 @@ function login() {
 		username: $("#inpUsername").val(),
 		pwd: $("#inpPassword").val()
 	}, function(data) {
-		console.log(data);
 		if (data.length === 0) {
 			// login failed
 			$("#errorAdmin").css("display","block");
@@ -148,7 +145,13 @@ function addCart(productID) {
   var json_str = JSON.stringify(cart);
   createCookie('cart', json_str);
 
-  alert("Product added to cart!");
+  $.get("/api/product/get/"+productID, {}, function (data) {
+  	let product = parseJSON(data[0]);
+  	$('#divCartAdd').modal('show');
+  	$(".modal-title").html(`Added to cart!`);
+	$("#cartPrev").html(`<img src='/static/media/${product.img}' height="100px"><br><h4>1 x ${product.name}, ${product.price} kr.</h4>`);
+  });
+
   $("#lblCart").html(`Cart (${cart.length})`);
 }
 
