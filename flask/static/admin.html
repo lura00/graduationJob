@@ -41,8 +41,8 @@
         <!-- Login form -->
         <div class="form-group" id="frmLogin">
             <h3>Admin login</h3>
-            <input type="text" class="form-control" id="inpUsername" placeholder="Admin username">
-            <input type="password" class="form-control" id="inpPassword" placeholder="Password">
+            <input type="text" class="form-control" id="inpUsername" onkeydown="if(event.keyCode===13) login()" placeholder="Admin username">
+            <input type="password" class="form-control" id="inpPassword" onkeydown="if(event.keyCode===13) login()" placeholder="Password">
             <div id="errorAdmin" class="alert alert-danger" style="display: none;">Invalid login. Try again.</div>
             <button type="submit" class="btn btn-primary" onclick="login()">Login</button>
         </div>
