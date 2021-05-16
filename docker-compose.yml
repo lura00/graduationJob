@@ -8,6 +8,7 @@ services:
     volumes:
       - ./flask
     ports:
+      - 5000:5000
       - 5001:5001
 
   db:
@@ -18,3 +19,24 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    links:
+      - flask-services
+    ports:
+      - 9090:9090
+
+  grafana:
+    image: grafana/grafana:latest
+    links:
+      - prometheus
+    ports:
+      - 3000:3000

@@ -2,13 +2,22 @@ import os
 from flask import Flask, render_template, jsonify, request, abort
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
+from prometheus_client import start_http_server, Counter
 
 app = Flask(__name__, template_folder='static/')
 
+metrics_port = 5001
+# define metrics for prometheus
+index_count = Counter('index_count', 'Front page views')
+search_count = Counter('search_count', 'Search products requests')
+product_count = Counter('product_count', 'Get product requests')
+upload_count = Counter('upload_count', 'Image upload')
+product_add_count = Counter('product_add_count', 'New product added')
+
 # db config
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_HOST'] = 'db'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'webshop'
 
 # file upload
@@ -20,6 +29,7 @@ mysql = MySQL(app)
 # index page
 @app.route('/')
 def index():
+    index_count.inc()
     return render_template("index.html")
 
 # admin page
@@ -35,6 +45,7 @@ def cart():
 # get product by ID
 @app.route('/api/product/get/<int:id>')
 def get(id):
+    product_count.inc()
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM product WHERE productID = %s", [id])
     myresult = cur.fetchall()
@@ -68,6 +79,7 @@ def getAll():
 # search products
 @app.route('/api/product/search')
 def search():
+    search_count.inc()
     keyword = "%"+request.args.get('keyword')+"%"
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM product WHERE name LIKE %s LIMIT 7", [keyword])
@@ -95,6 +107,7 @@ def upload():
         uploaded_file = request.files['file']
         filename = secure_filename(uploaded_file.filename)
         if filename != '' and allowed_file(filename):
+            upload_count.inc()
             absolute_path = os.path.abspath("static/media/"+filename)
             uploaded_file.save(absolute_path)
             return filename
@@ -105,6 +118,7 @@ def upload():
 @app.route('/api/product/add', methods=['POST', 'GET'])
 def add():
     if request.method == "POST":
+        product_add_count.inc()
         name = request.form.get("name")
         short_desc = request.form.get("short_desc")
         long_desc = request.form.get("long_desc")
@@ -117,4 +131,5 @@ def add():
         return "ok"
 
 if __name__ == "__main__":
-    app.run(host ='0.0.0.0', port = 5001, debug = True, ssl_context=('cert/cert.pem', 'cert/key.pem'))
+    start_http_server(metrics_port)
+    app.run(host ='0.0.0.0', port = 5000, debug = False, ssl_context=('cert/cert.pem', 'cert/key.pem'))
