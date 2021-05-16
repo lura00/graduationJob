@@ -98,7 +98,7 @@
 		        $("#tblCart").append(`
 		              <tr id="cartItem" style="height:12em; border-top: 1px solid grey">
 		              <td><button style="margin-left: 2em" onclick="deleteItem(${product.id})" class="btn btn-close btn-lg"></button></td>
-                      <td><img style="width: 9em; height: 9em; margin-left: 1em" src='/static/media/${product.img}'></td>
+                      <td><img style="width: 7em; height: 7em; margin-left: 1em" src='/static/media/${product.img}'></td>
                       <td style="text-align: center" ><p style="width: 9em; font-size:1.3em; margin-left: 2em; margin-bottom: 0">${product.name}</p></td>
                       <td><button class="btn btn-outline-primary" style="margin-left: 1.5em; margin-right: .5em" onclick="editCart(${cart[i].productID}, false, ${product.price})">-</button>
                       <span style="font-size: 1.1em" id=lblAntall${cart[i].productID}>${cart[i].antall}</span>
