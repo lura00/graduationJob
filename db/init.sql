@@ -1,6 +1,4 @@
 CREATE DATABASE IF NOT EXISTS webshop;
-CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY '';
-GRANT ALL ON webshop.* TO 'admin'@'localhost';
 USE webshop;
 
 CREATE TABLE IF NOT EXISTS product (
@@ -17,9 +15,6 @@ CREATE TABLE IF NOT EXISTS adminLogin (
   username varchar(50) NOT NULL,
   pwd varchar(50) NOT NULL
 );
-
-DELETE FROM product;
-DELETE FROM adminLogin;
 
 INSERT INTO adminLogin (username, pwd) VALUES ("admin", "password");
 
