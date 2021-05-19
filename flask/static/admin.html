@@ -53,9 +53,9 @@
             <input type="file" class="form-control" name="file" id="file" onchange="uploadMedia()">
             <div class="alert alert-danger" id="error" style="display: none;">Invalid filetype. Accepted filetypes are: png, jpg, jpeg, gif, tif, webp.</div>
             <img id="preview" alt="No image" src="static/media/placeholder.jpg">
-            <input type="text" class="form-control" id="inpName" placeholder="Product name" required>
-            <input class="form-control" id="inpShortDesc" placeholder="Short description" required></input>
-            <textarea class="form-control" id="inpLongDesc" placeholder="Long description" required></textarea>
+            <input type="text" class="form-control" id="inpName" maxlength="50" placeholder="Product name" required>
+            <input class="form-control" id="inpShortDesc" maxlength="100" placeholder="Short description" required></input>
+            <textarea class="form-control" id="inpLongDesc" maxlength="255" placeholder="Long description" required></textarea>
             <input type="number" step="0.01" class="form-control" id="inpPrice" min="1" max="99999" placeholder="Price in kr." required>
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
