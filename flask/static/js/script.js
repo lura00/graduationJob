@@ -90,6 +90,7 @@ function login() {
 		} else {
 			// login ok
 			$("#errorAdmin").css("display","none");
+			$("#loginStatus").css("display","block");
 			$("#frmLogin").css("display", "none");
 			$("#frmProduct").css("display", "block");
 		}
