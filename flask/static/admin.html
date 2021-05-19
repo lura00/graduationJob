@@ -56,7 +56,7 @@
             <input type="text" class="form-control" id="inpName" placeholder="Product name" required>
             <input class="form-control" id="inpShortDesc" placeholder="Short description" required></input>
             <textarea class="form-control" id="inpLongDesc" placeholder="Long description" required></textarea>
-            <input type="number" step="0.01" class="form-control" id="inpPrice" placeholder="Price in kr." required>
+            <input type="number" step="0.01" class="form-control" id="inpPrice" min="1" max="99999" placeholder="Price in kr." required>
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
     </div>
