@@ -6,8 +6,19 @@ The task was to build a simple webshop using a RESTful API and deploy this using
 ## How to run
 1. Download **Docker** and **Docker compose** from: https://docs.docker.com/get-docker/
 2. Clone or download this project and navigate to the folder with the **docker-compose.yml** file. 
-3. Run **"docker-compose up"** in a terminal or command prompt.
-4. Open up https://localhost:5000 to see the webshop.
+3. In the folder, open up a terminal or command prompt and run the following command:
+   ```console
+   docker-compose up
+   ```
+   NB: You need to be sudo to run the command in Linux. <br />
+   
+### When the command is finished. You can navigate to the following URLs:
+
+URL | Description
+------------ | -------------
+https://localhost:5000 | The webshop
+http://localhost:9090  | Prometheus (resource tracking)
+http://localhost:3000  | Grafana (graphically displays data from prometheus)
 
 NB: The website uses a self signed SSL certificate, so you must allow this in your web browser.
 
