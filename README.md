@@ -3,7 +3,7 @@
 # Flask-webshop
 
 This was the final group project in the course "DATA2410 Networking and cloud computing" at OsloMet. <br />
-The task was to build a simple webshop using a RESTful API and deploy this using Docker.
+The task was to build a simple webshop using Python Flask and a RESTful API. <br />
 
 ## How to run:
 1. Download **Docker** and **Docker compose** from: https://docs.docker.com/get-docker/
