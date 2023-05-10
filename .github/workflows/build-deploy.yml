@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      REPO: eu.gcr.io/BreakingBad-gke-gradJob
+      REPO: eu.gcr.io/breakingbad-gke-gradjob
       IMAGE: flask-app
     outputs:
       tag: ${{ steps.version_bump.outputs.tag }}
