@@ -59,4 +59,4 @@ jobs:
           gcloud container clusters get-credentials breakingbad-gke-gradjob --zone europe-west1-c
       - name: Deploy application
         run: |
-          kubectl apply -f deployment.yam
+          kubectl apply -f deployment.yaml
