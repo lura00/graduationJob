@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-webshop
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-webshop
+  template:
+    metadata:
+      labels:
+        app: flask-webshop
+    spec:
+      containers:
+      - name: flask-webshop
+        image: gcr.io/breakingbad-gke-gradjob/flask-app:latest
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-webshop
+spec:
+  selector:
+    app: flask-webshop
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: LoadBalancer
