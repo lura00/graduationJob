@@ -1,6 +1,9 @@
 name: Build and Push Docker Image to GCR
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -43,3 +46,17 @@ jobs:
         run: docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
       - name: Push image
         run: docker push $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+  deploy_GKE:
+    runs-on: 'ubuntu-latest'
+    needs: [build]
+    steps:
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}
+      - name: Configure kubectl
+        run: |
+          gcloud container clusters get-credentials breakingbad-gke-gradjob --zone europe-west1-c
+      - name: Deploy application
+        run: |
+          kubectl apply -f deployment.yam
