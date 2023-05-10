@@ -56,7 +56,7 @@ jobs:
           service_account_key: ${{ secrets.GKE_KEY }}
       - name: Configure kubectl
         run: |
-          gcloud container clusters get-credentials breakingbad-gke-gradjob --zone europe-west1-c
+          gcloud container clusters get-credentials --project breakingbad-gke-gradjob --zone europe-west1-c
       - name: Deploy application
         run: |
-          kubectl apply -f deployment.yam
+          kubectl apply -f deployment.yaml
