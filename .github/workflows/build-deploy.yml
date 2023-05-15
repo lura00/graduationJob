@@ -54,9 +54,10 @@ jobs:
         with:
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
-      - name: Configure kubectl
+      - name: Install GKE auth plugin
         run: |
           gcloud components install gke-gcloud-auth-plugin
+      - name: Configure kubectl
         run: |
           gcloud container clusters get-credentials  breakingbad-gke-gradjob-gke --zone europe-west1-c --project breakingbad-gke-gradjob
       - name: Deploy application
