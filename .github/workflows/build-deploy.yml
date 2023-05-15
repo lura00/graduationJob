@@ -60,6 +60,8 @@ jobs:
       - name: Configure kubectl
         run: |
           gcloud container clusters get-credentials  breakingbad-gke-gradjob-gke --zone europe-west1-c --project breakingbad-gke-gradjob
+      - name: checkout repo
+        uses: actions/checkout@v2.3.4
       - name: Deploy application
         run: |
           kubectl apply -f deployment.yaml
