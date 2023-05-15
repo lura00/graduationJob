@@ -56,6 +56,9 @@ jobs:
           service_account_key: ${{ secrets.GKE_KEY }}
       - name: Configure kubectl
         run: |
+          gcloud components install gke-gcloud-auth-plugin,
+          gke-gcloud-auth-plugin --version,
+          export USE_GKE_GCLOUD_AUTH_PLUGIN=True,
           gcloud container clusters get-credentials  breakingbad-gke-gradjob-gke --zone europe-west1-c --project breakingbad-gke-gradjob
       - name: Deploy application
         run: |
