@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-webshop
-        image: eu.gcr.io/breakingbad-gke-gradjob/flask-app:latest
+        image: eu.gcr.io/breakingbad-gke-gradjob/flask-app
         ports:
         - containerPort: 5000
 ---
