@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: eu.gcr.io/breakingbad-gke-gradjob/flask-app:latest
+        image: eu.gcr.io/breakingbad-gke-gradjob/flask-app:0.0.19
         ports:
         - containerPort: 5000
 ---
