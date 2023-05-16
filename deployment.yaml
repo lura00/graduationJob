@@ -2,18 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-webshop
+  namespace: default
+  labels:
+    app: flask-webshop
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: flask-webshop
+  replicas: 1
   template:
     metadata:
       labels:
         app: flask-webshop
     spec:
       containers:
-      - name: flask-webshop
+      - name: flask-app
         image: eu.gcr.io/breakingbad-gke-gradjob/flask-app:latest
         ports:
         - containerPort: 5000
