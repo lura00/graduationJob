@@ -47,7 +47,7 @@ jobs:
       # Push image
       - name: Build docker
         run: |
-          docker build flask/. -t $REPO/$IMAGE
+          docker build flask/. -t $IMAGE:$IMAGE_TAG
       - name: Push image
         run: docker push $IMAGE_NAME
         # $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
