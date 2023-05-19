@@ -65,7 +65,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          gcloud auth activate-service-account --key-file=${HOME}/${GCP_SA_KEY}
+          gcloud auth activate-service-account --key-file=${GCP_SA_KEY}
           gcloud auth configure-docker
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 --push -t gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG} .
