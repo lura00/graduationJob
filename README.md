@@ -42,3 +42,11 @@ Backend:
  
  Deployment
   - Docker and Docker compose
+
+# BreakingBad Graduation Job
+
+- Test out app locally: 'docker-compose up'
+
+- Created helmcharts with software, Kompose, script: kompose convert -f docker-compose.yml
+
+- Pipeline in Github is directed towards 
