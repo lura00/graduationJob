@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: eu.gcr.io/breakingbad-w-kbit/flask-app/flask-app:0.0.25-beta.13
+        image: eshopdapr/webshoppingagg:latest
         ports:
         - containerPort: 5000
 ---
