@@ -5,86 +5,53 @@ on:
     branches:
       - test-feature
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     environment: production
-#     env:
-#       REPO: eu.gcr.io/breakingbad-w-kbit
-#       IMAGE: flask-app
-#     outputs:
-#       tag: ${{ steps.version_bump.outputs.tag }}
-#     steps:
-#       # Checkout code (to get helm chart)
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#         with:
-#           fetch-depth: 0
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      REPO: eu.gcr.io/breakingbad-w-kbit
+      IMAGE: flask-app
+      PROJECT_ID: breakingbad-w-kbit
+      IMAGE_NAME: flask-app
+      IMAGE_TAG: latest
+    outputs:
+      tag: ${{ steps.version_bump.outputs.tag }}
+    steps:
+      # Checkout code (to get helm chart)
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
 
-#       # Set version and push tag
-#       - name: Set version
-#         id: version_bump
-#         uses: anothrNick/github-tag-action@1.36.0
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-#           DEFAULT_BUMP: "patch"
-#           RELEASE_BRANCHES: "main"
+      # Set version and push tag
+      - name: Set version
+        id: version_bump
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          DEFAULT_BUMP: "patch"
+          RELEASE_BRANCHES: "main"
       
 
-#       # Setup GCP
-#       - name: Setup gcloud
-#         uses: google-github-actions/setup-gcloud@v0
-#         with:
-#           service_account_email: ${{ secrets.GKE_EMAIL }}
-#           service_account_key: ${{ secrets.GKE_KEY }}
-#           export_default_credentials: true
+      # Setup GCP
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}
+          export_default_credentials: true
 
-#       - run: gcloud auth configure-docker
-#       # Push image
-#       - name: Build docker
-#         run: docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
-#       - name: Push image
-#         run: docker push $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
-env:
-  PROJECT_ID: breakingbad-w-kbit
-  IMAGE_NAME: flask-app
-  IMAGE_TAG: latest
-  GCP_SA_KEY: ${{ secrets.GKE_KEY }}
-
-jobs:
-  build_and_push:
-    name: Build and push
-    runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: flask-app
-      PROJECT_ID: breakingbad-w-kbit
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - uses: google-github-actions/setup-gcloud@v1
-      with:
-        service_account_key: ${{ secrets.GKE_KEY }}
-        project_id: ${{ env.PROJECT_ID }}
-        export_default_credentials: true
-
-    - name:  Build Docker Image
-      run: docker build -t $IMAGE_NAME:latest flask/.
-
-    - name: Configure Docker Client
-      run: |-
-        gcloud auth configure-docker --quiet
-
-    - name: Push Docker Image to Container Registry (GCR)
-      env:
-        GIT_TAG: v0.1.0
-      run: |-
-        sudo usermod -a -G docker ${USER}
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+      - run: gcloud auth configure-docker
+      # Push image
+      - name: Build docker
+        run: |
+          docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+          docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+      - name: Push image
+        run: docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        # $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
 
   deploy_GKE:
     runs-on: 'ubuntu-latest'
