@@ -72,15 +72,15 @@ jobs:
     - name:  Build Docker Image
       run: docker build -t $IMAGE_NAME:latest flask/.
 
-    - name: Configure Docker Client
-      run: |-
-        gcloud auth configure-docker --quiet
+    # - name: Configure Docker Client
+    #   run: |-
+    #     gcloud auth configure-docker --quiet
 
     - name: Push Docker Image to Container Registry (GCR)
       env:
         GIT_TAG: v0.1.0
       run: |-
-        sudo usermod -a -G docker ${USER}
+        gcloud auth configure-docker --quiet
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
