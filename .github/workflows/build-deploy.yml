@@ -65,7 +65,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          echo ${GCP_SA_KEY} | base64 --decode > ${HOME}/gcp_key.json
+          echo ${GCP_SA_KEY} > ${HOME}/gcp_key.json
           gcloud auth activate-service-account --key-file=${HOME}/gcp_key.json
           gcloud auth configure-docker
           docker buildx create --use
