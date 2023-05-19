@@ -50,8 +50,3 @@ Backend:
 - Created helmcharts with software, Kompose, script: kompose convert -f docker-compose.yml
 
 - Pipeline in Github is directed towards 
-
-
-/${{ steps.version_bump.outputs.tag }}
-
-/${{ steps.version_bump.outputs.tag }}
