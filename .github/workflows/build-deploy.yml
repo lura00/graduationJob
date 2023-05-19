@@ -3,14 +3,14 @@ name: Build and Push Docker Image to GCR
 on:
   push:
     branches:
-      - main
+      - test-feature
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: production
     env:
-      REPO: eu.gcr.io/breakingbad-gke-gradjob
+      REPO: eu.gcr.io/breakingbad-w-kbit
       IMAGE: flask-app
     outputs:
       tag: ${{ steps.version_bump.outputs.tag }}
