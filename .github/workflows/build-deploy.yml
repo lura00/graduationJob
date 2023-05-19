@@ -77,9 +77,9 @@ jobs:
           # docker buildx build --platform linux/amd64,linux/arm64 --push -t gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG} .
 
       - name: Build docker
-        run: docker build flask/. -t $REPO/${IMAGE_NAME}:${IMAGE_TAG}
+        run: docker build flask/. -tag $REPO/${IMAGE_NAME}:${IMAGE_TAG}
       - name: Push image
-        run: docker push -t gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
+        run: docker push -tag gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
 
       - name: Clean up
         run: docker buildx stop
