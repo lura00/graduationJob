@@ -50,3 +50,6 @@ Backend:
 - Created helmcharts with software, Kompose, script: kompose convert -f docker-compose.yml
 
 - Pipeline in Github is directed towards 
+
+
+docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG

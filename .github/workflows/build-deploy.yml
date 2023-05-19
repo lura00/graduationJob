@@ -48,9 +48,8 @@ jobs:
       - name: Build docker
         run: |
           docker build flask/. -t $REPO/$IMAGE
-          docker tag $IMAGE_NAME gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
       - name: Push image
-        run: docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG        
+        run: docker push gcr.io/$PROJECT_ID/$IMAGE_NAME
         # $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
         # ${{ steps.version_bump.outputs.tag }}
 
