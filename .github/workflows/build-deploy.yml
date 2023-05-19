@@ -65,13 +65,13 @@ jobs:
 
       - name: Build and push Docker image
       - name: Setup gcloud
-         uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v0
          with:
            service_account_email: ${{ secrets.GKE_EMAIL }}
            service_account_key: ${{ secrets.GKE_KEY }}
            export_default_credentials: true
 
-       - run: |
+      - run: |
           gcloud auth configure-docker
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 --push -t gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG} .
