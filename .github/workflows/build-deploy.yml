@@ -74,7 +74,7 @@ jobs:
       - name: Clean up
         run: docker buildx stop
 
-  deploy_GKE:s
+  deploy_GKE:
     runs-on: 'ubuntu-latest'
     needs: [build]
     steps:
