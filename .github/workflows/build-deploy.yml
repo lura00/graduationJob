@@ -47,7 +47,9 @@ jobs:
       - name: Pull Docker image
         run: docker pull yeasy/simple-web
       - name: Push image
-        run: docker push yeasy/simple-web:${{ steps.version_bump.outputs.tag }}
+        run: docker push yeasy/simple-web
+
+        # :${{ steps.version_bump.outputs.tag }}
 
   deploy_GKE:
     runs-on: 'ubuntu-latest'
