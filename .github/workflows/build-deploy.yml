@@ -13,7 +13,7 @@ jobs:
       REPO: eu.gcr.io/breakingbad-w-kbit
       IMAGE: flask-app
     outputs:
-      tag: ${{ steps.version_bump.outputs.tag }}
+      # tag: ${{ steps.version_bump.outputs.tag }}
     steps:
       # Checkout code (to get helm chart)
       - name: Checkout
