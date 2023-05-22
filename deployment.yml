@@ -19,7 +19,7 @@ spec:
       - name: flask-app
         image: eu.gcr.io/breakingbad-w-kbit/flask-app:0.0.24-beta.37
         ports:
-        - containerPort: 80
+        - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
@@ -30,6 +30,6 @@ spec:
     app: flask-webshop
   ports:
   - protocol: TCP
-    port: 80
+    port: 5000
     targetPort: 80
   type: LoadBalancer
