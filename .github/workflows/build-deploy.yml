@@ -43,9 +43,11 @@ jobs:
       - run: gcloud auth configure-docker
       # Push image
       - name: Build docker
-        run: docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+        # run: docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+        run: docker pull yeasy/simple-web
       - name: Push image
-        run: docker push $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+        # run: docker push $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
+        run: docker push $REPO/yeasy/simple-web:latest
 
   deploy_GKE:
     runs-on: 'ubuntu-latest'
