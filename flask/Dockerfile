@@ -8,4 +8,4 @@ ENV FLASK_APP=server.py
 RUN pip install -r requirements.txt
 EXPOSE 5000
 ENTRYPOINT [ "python" ]
-CMD ["flask", "run"]
+CMD ["docker", "run"]
