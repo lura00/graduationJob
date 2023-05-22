@@ -10,11 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      REPO: eu.gcr.io/breakingbad-w-kbit
+      REPO: eu.gcr.io/breakingbad-gke-gradjob
       IMAGE: flask-app
-      PROJECT_ID: breakingbad-w-kbit
-      IMAGE_NAME: flask-app
-      IMAGE_TAG: eu.gcr.io/breakingbad-w-kbit/flask-app
     outputs:
       tag: ${{ steps.version_bump.outputs.tag }}
     steps:
@@ -46,12 +43,9 @@ jobs:
       - run: gcloud auth configure-docker
       # Push image
       - name: Build docker
-        run: |
-          docker build flask/. -t $IMAGE
+        run: docker build flask/. -t $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
       - name: Push image
-        run: docker push eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-        # $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
-        # ${{ steps.version_bump.outputs.tag }}
+        run: docker push $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
 
   deploy_GKE:
     runs-on: 'ubuntu-latest'
