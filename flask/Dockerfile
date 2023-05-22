@@ -4,7 +4,7 @@ RUN apk update \
     && apk add --no-cache mariadb-dev
 COPY . /app
 WORKDIR /app
-ENV FLASP_APP=server.py
+ENV FLASK_APP=server.py
 RUN pip install -r requirements.txt
 EXPOSE 5000
 ENTRYPOINT [ "python" ]
