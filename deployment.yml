@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: eu.gcr.io/breakingbad-w-kbit/flask-app:0.0.24-beta.50
+        image: eu.gcr.io/breakingbad-w-kbit/flask-app:0.0.24-beta.51
         ports:
         - containerPort: 5000
 ---
@@ -31,5 +31,5 @@ spec:
   ports:
   - protocol: TCP
     port: 5000
-    targetPort: 80
+    targetPort: 5000
   type: LoadBalancer
