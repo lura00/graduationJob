@@ -47,7 +47,7 @@ jobs:
       # Push image
       - name: Build docker
         run: |
-          docker build flask/. -t $IMAGE:$IMAGE_TAG
+          docker build flask/. -t $IMAGE
       - name: Push image
         run: docker push eu.gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
         # $REPO/$IMAGE:${{ steps.version_bump.outputs.tag }}
